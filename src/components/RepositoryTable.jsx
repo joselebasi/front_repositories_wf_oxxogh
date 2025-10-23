@@ -6,7 +6,7 @@ const RepositoryTable = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/api/workflows_repositories_data')
+    fetch('/api/get_wf_repositories_data')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
