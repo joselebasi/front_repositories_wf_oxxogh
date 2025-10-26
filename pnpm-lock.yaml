@@ -17,6 +17,9 @@ importers:
       '@clerk/astro':
         specifier: ^2.14.1
         version: 2.14.1(astro@5.15.1(@types/node@24.9.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.52.5)(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@clerk/localizations':
+        specifier: ^3.26.3
+        version: 3.26.3
       '@clerk/themes':
         specifier: ^2.4.29
         version: 2.4.29
@@ -173,6 +176,10 @@ packages:
 
   '@clerk/backend@2.19.0':
     resolution: {integrity: sha512-EXeuG97O0c/OtXVQqw4a0RK1xfMe5+zkp5f0hZWkUob5l7NXX/f/PzbbtNQ1Ae+Maam0aC08uFNwgy2BpGvn6w==}
+    engines: {node: '>=18.17.0'}
+
+  '@clerk/localizations@3.26.3':
+    resolution: {integrity: sha512-72TOjkt2q5V/z+HGq3Pz/ejXy4EO/iAiUTC2OuvJ8ny8RN7HMyOsa5ENgDok8DLjsUoDTnqHYCGh1XruRHWDqA==}
     engines: {node: '>=18.17.0'}
 
   '@clerk/shared@3.28.3':
@@ -2251,6 +2258,10 @@ snapshots:
     transitivePeerDependencies:
       - react
       - react-dom
+
+  '@clerk/localizations@3.26.3':
+    dependencies:
+      '@clerk/types': 4.95.1
 
   '@clerk/shared@3.28.3(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
