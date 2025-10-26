@@ -12,6 +12,7 @@
     "@astrojs/node": "^9.5.0",
     "@astrojs/react": "^4.4.0",
     "@clerk/astro": "^2.14.1",
+    "@clerk/themes": "^2.4.29",
     "@supabase/supabase-js": "^2.76.1",
     "@tailwindcss/vite": "^4.1.15",
     "@types/react": "^19.2.2",

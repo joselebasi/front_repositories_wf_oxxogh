@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 import node from '@astrojs/node';
 import clerk from "@clerk/astro";
+import { dark } from '@clerk/themes';
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,5 +13,9 @@ export default defineConfig({
   },
   adapter: node({ mode: 'standalone' }),
   output: 'server',
-  integrations: [react(), clerk()]
+  integrations: [react(), clerk({
+    appearance: {
+      baseTheme: dark,
+    }
+  })]
 });
