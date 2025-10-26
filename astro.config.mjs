@@ -7,12 +7,14 @@ import clerk from "@clerk/astro";
 import { dark } from '@clerk/themes';
 import { esMX } from '@clerk/localizations';
 
+import netlify from '@astrojs/netlify';
+
 // https://astro.build/config
 export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  adapter: node({ mode: 'standalone' }),
+  adapter: netlify(),
   output: 'server',
   integrations: [react(), clerk({
     localization: esMX,
