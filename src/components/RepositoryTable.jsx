@@ -18,12 +18,12 @@ const RepositoryTable = () => {
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const paginatedData = filteredData.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage);
 
+  const [selectedId, setSelectedId] = useState(1);
   useEffect(() => {
     const loadData = async () => {
       try {
         // Llamas directamente la acción del servidor
-        const { data, error } = await actions.wf_repositories_data.getWfRepositoriesDataByIdType(3);
-
+        const { data, error } = await actions.wf_repositories_data.getWfRepositoriesDataByIdType(selectedId);
         if (error) throw new Error(error.message || 'Error al obtener datos');
         console.log('Fetched data json:', data);
         setData(data);
@@ -49,7 +49,7 @@ const RepositoryTable = () => {
         setTlError(err.message);
         setTlLoading(false);
       });
-  }, []);
+  }, [selectedId]);
 
   const handleUpdate = async (row) => {
     try {
@@ -90,34 +90,54 @@ const RepositoryTable = () => {
 
   return (
     <>
-      <div style={{ marginBottom: '16px', textAlign: 'left' }}>
+      <nav className="mb-4 flex gap-4">
+        <button
+          className={`px-3 py-2 rounded ${selectedId === 1 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => setSelectedId(1)}
+        >
+          DATABASE
+        </button>
+        <button
+          className={`px-3 py-2 rounded ${selectedId === 2 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => setSelectedId(2)}
+        >
+          SHELL
+        </button>
+        <button
+          className={`px-3 py-2 rounded ${selectedId === 3 ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+          onClick={() => setSelectedId(3)}
+        >
+          APPLICATION
+        </button>
+      </nav>
+  <div className="mb-4 text-left">
         <input
           type="text"
           placeholder="Find repo by name..."
           value={search}
           onChange={e => { setSearch(e.target.value); setCurrentPage(1); }}
-          style={{ padding: '8px', width: '300px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
+          className="px-2 py-2 w-72 text-base rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
-      </div>
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+  </div>
+  <table className="w-full border-collapse">
       <thead>
         <tr>
           {columns.map(col => (
-            <th key={col.key} style={{ border: '1px solid #ccc', padding: '8px', background: '#f5f5f5' }}>{col.label}</th>
+            <th key={col.key} className="border border-gray-300 p-2 bg-gray-100 text-left">{col.label}</th>
           ))}
         </tr>
       </thead>
       <tbody>
         {paginatedData.map((row, idx) => {
-          // Find the index in filteredData, then in data
+          // ...existing code...
           const filteredIdx = filteredData.findIndex(r => r.id === row.id);
           const dataIdx = data.findIndex(r => r.id === row.id);
           return (
             <tr key={row.id}>
               {columns.map(col => (
-                <td key={col.key} style={{ border: '1px solid #ccc', padding: '8px' }}>
+                <td key={col.key} className="border border-gray-300 p-2">
                   {col.key === 'name' ? (
-                    <a href={row.url} target="_blank" rel="noopener noreferrer">{row.name}</a>
+                    <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{row.name}</a>
                   ) : col.key === 'id_technical_leader' ? (
                     <select
                       value={row.id_technical_leader || ''}
@@ -126,6 +146,7 @@ const RepositoryTable = () => {
                         newData[dataIdx] = { ...newData[dataIdx], id_technical_leader: e.target.value };
                         setData(newData);
                       }}
+                      className="px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
                       <option value="">Selecciona un LT</option>
                       {technicalLeaders && Array.isArray(technicalLeaders) && technicalLeaders.map(tl => (
@@ -142,13 +163,17 @@ const RepositoryTable = () => {
                           newData[dataIdx] = { ...newData[dataIdx], [col.key]: e.target.checked };
                           setData(newData);
                         }}
+                        className="form-checkbox h-5 w-5 text-blue-600"
                       />
                     ) : row[col.key]
                   )}
                 </td>
               ))}
               <td>
-                <button onClick={() => handleUpdate(row)} style={{ padding: '6px 12px', background: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                <button
+                  onClick={() => handleUpdate(row)}
+                  className="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                >
                   Update
                 </button>
               </td>
@@ -157,10 +182,22 @@ const RepositoryTable = () => {
         })}
       </tbody>
     </table>
-    <div style={{ marginTop: '16px', textAlign: 'center' }}>
-      <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} style={{ marginRight: '8px' }}>Prev</button>
-      <span>Page {currentPage} of {totalPages}</span>
-      <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} style={{ marginLeft: '8px' }}>Next</button>
+    <div className="flex justify-center gap-2 mt-8 mb-8">
+      <button
+        onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+        disabled={currentPage === 1}
+        className="mr-2 px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+      </button>
+      <span className="px-2 py-1">Page {currentPage} of {totalPages}</span>
+      <button
+        onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+        disabled={currentPage === totalPages}
+        className="ml-2 px-2 py-1 rounded border border-gray-300 bg-white text-gray-700 hover:bg-gray-100 disabled:opacity-50"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+      </button>
     </div>
     </>
   );
