@@ -68,5 +68,34 @@ export const wf_repositories_data = {
       }
       return data;
     }
+  }),
+  getWfRepositoriesDataById: defineAction({
+    input: z.object({
+      id: z.number(),
+    }),
+    handler: async (input) => {
+      console.log(`Fetching repository data for ID: ${input.id}`);
+      const { data, error } = await supabase
+        .from('wf_repositories_data')
+        .select(`
+            *,
+            wf_repositories_data_id_type_repository_fkey (
+              id,
+              name,
+              short_name
+            ),
+            wf_repositories_data_id_technical_leader_fkey (
+              id,
+              name,
+              email
+            )
+          `)
+        .eq('id', input.id);
+      if (error) {
+        console.error('Error fetching repository data:', error.message);
+        return null;
+      }
+      return data;
+    }
   })
 }

@@ -137,7 +137,7 @@ const RepositoryTable = () => {
               {columns.map(col => (
                 <td key={col.key} className="border border-gray-300 p-2">
                   {col.key === 'name' ? (
-                    <a href={row.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{row.name}</a>
+                    <a href={`/dashboard/repository/${row.id}`} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">{row.name}</a>
                   ) : col.key === 'id_technical_leader' ? (
                     <select
                       value={row.id_technical_leader || ''}
