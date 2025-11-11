@@ -1,6 +1,33 @@
+
 import { defineAction } from 'astro:actions';
 import { supabase } from './db_client';
 import { z } from 'astro:schema';
+
+// TypeScript type for repository data
+export type WfRepositoryData = {
+  id: number;
+  created_at: string;
+  name: string;
+  url: string;
+  checkmarx_flag: boolean;
+  change_velocity_flag: boolean;
+  continuous_build_flag: boolean;
+  created_at_github: string;
+  pushed_at_github: string;
+  id_technical_leader: number;
+  update_at: string;
+  id_type_repository: number;
+  wf_repositories_data_id_type_repository_fkey: {
+    id: number;
+    name: string;
+    short_name: string;
+  };
+  wf_repositories_data_id_technical_leader_fkey: {
+    id: number;
+    name: string;
+    email: string;
+  };
+};
 
 export const wf_repositories_data = {
   getAllWfRepositoriesData: defineAction({
@@ -11,9 +38,9 @@ export const wf_repositories_data = {
         .select('*');
       if (error) {
         console.error('Error fetching repositories data:', error.message);
-        return [];
+        return [] as WfRepositoryData[];
       }
-      return data;
+      return data as WfRepositoryData[];
     }
   }),
   getWfRepositoriesDataByIdType: defineAction({
@@ -73,7 +100,7 @@ export const wf_repositories_data = {
     input: z.object({
       id: z.number(),
     }),
-    handler: async (input) => {
+    handler: async (input): Promise<WfRepositoryData | null> => {
       console.log(`Fetching repository data for ID: ${input.id}`);
       const { data, error } = await supabase
         .from('wf_repositories_data')
@@ -95,7 +122,11 @@ export const wf_repositories_data = {
         console.error('Error fetching repository data:', error.message);
         return null;
       }
-      return data;
+      // supabase returns an array for select, get the first item or null
+      if (Array.isArray(data) && data.length > 0) {
+        return data[0] as WfRepositoryData;
+      }
+      return null;
     }
   })
 }

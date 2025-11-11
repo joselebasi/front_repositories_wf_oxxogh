@@ -1,19 +1,23 @@
 ---
 import { actions } from 'astro:actions';
 import Layout from '@/layouts/Layout.astro';
+import RepositoryInfo from '@/components/RepositoryInfo.astro';
+
 
 const { id } = Astro.params;
 console.log('Repository ID:', id);
-const { data } = await Astro.callAction(actions.wf_repositories_data.getWfRepositoriesDataById, { id: Number(id) });
-console.log(data);
+import type { WfRepositoryData } from '@/actions/wf_repositories_data';
+const result = await Astro.callAction(actions.wf_repositories_data.getWfRepositoriesDataById, { id: Number(id) });
+const data: WfRepositoryData | null = result.error ? null : result.data;
+
 ---
 <Layout title={`Repository ${id} Details`}>
-  <div>
-    <h1>Repository Details</h1>
-    {data ? (
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    ) : (
-      <p>No data found.</p>
-    )}
+  <RepositoryInfo name={data?.name} tipo={data?.wf_repositories_data_id_type_repository_fkey.name} />
+  <div class="container mx-auto p-4">
+    <form method="post" action="/api/create-log" class="max-w-md mx-auto mb-8">
+      <input type="hidden" name="id_repository" value={id} />
+      <textarea name="comment" id="coment" class="block w-full border border-gray-300 rounded mb-2 p-2" required></textarea>
+      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded px-5 py-2.5">Guardar</button>
+    </form>
   </div>
 </Layout>
