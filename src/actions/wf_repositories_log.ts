@@ -8,11 +8,12 @@ export const wf_repositories_log = {
     input: z.object({
       id_repository: z.number(),
       comment: z.string(),
+      created_by: z.string(),
     }),
     handler: async (input) => {
       const { data, error } = await supabase
         .from('wf_repositories_log')
-        .insert({ id_repository: input.id_repository, comment: input.comment });
+        .insert({ id_repository: input.id_repository, comment: input.comment, created_by: input.created_by });
       if (error) {
         console.error('Error inserting technical leader:', error.message);
         return `Error inserting log!`
