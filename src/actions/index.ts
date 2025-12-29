@@ -1,9 +1,15 @@
 import { wf_technical_leader } from './wf_technical_leader'
 import { wf_repositories_data } from './wf_repositories_data'
 import { wf_repositories_log } from './wf_repositories_log'
+import { bo_members_activity_data } from './bo_members_activity'
+import { bo_members_team_data } from './bo_members_team'
+import { bo_members_activity_fk_data } from './bo_members_activity_fk'
 
 export const server = {
   wf_technical_leader,
   wf_repositories_data,
-  wf_repositories_log
+  wf_repositories_log,
+  bo_members_activity_data,
+  bo_members_team_data,
+  bo_members_activity_fk_data
 }

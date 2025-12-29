@@ -1,0 +1,10 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import TableValidate from "@/components/TableValidate";
+
+const title = "Members Activity Backoffice";
+---
+
+<Layout title={title}>
+    <TableValidate client:load />
+</Layout>

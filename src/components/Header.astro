@@ -1,25 +1,40 @@
 ---
-import { SignedIn, SignedOut, UserButton, SignInButton} from "@clerk/astro/components";
+import {
+  SignedIn,
+  SignedOut,
+  UserButton,
+  SignInButton,
+  OrganizationSwitcher,
+} from "@clerk/astro/components";
+import OxxoLogo from "./OxxoLogo.astro";
 ---
+
 <header class="flex justify-between items-center p-8 bg-[#B91C1C]">
-  <div>
-    <img src="/logo1.png" alt="Ingenieria logo" width="90" height="90" />  
-    <h1>INGENIERIA</h1>
-    <h2>SOLUCIONES RH, FINANZAS Y CADENA DE SUMINISTRO</h2>
-    <nav>
-      <ul class="flex space-x-4">
-        
-        <li><a href="/dashboard/menu" class="text-white hover:underline">Menu</a></li>
-        <li><a href="/dashboard/form-technical-leader" class="text-white hover:underline">Lider Técnico</a></li>
-      </ul>
-    </nav>
+  <div class="flex items-center gap-6">
+    <a href="/" class="flex-shrink-0 cursor-pointer">
+      <OxxoLogo width="120" height="60" class="flex-shrink-0" />
+    </a>
+    <div class="border-l-2 border-white/30 h-20"></div>
+    <div>
+      <a href="/" class="cursor-pointer">
+        <img src="/logo1.png" alt="Ingenieria logo" width="90" height="90" />
+      </a>
+      <h1 class="text-white font-bold">INGENIERÍA</h1>
+      <h4 class="text-white">SOLUCIONES RH, FINANZAS</h4>
+      <h4 class="text-white">Y CADENA DE SUMINISTRO</h4>
+    </div>
   </div>
-  <nav>
-        <SignedOut>
-          <SignInButton mode="modal" class="text-white font-semibold rounded-full px-4 py-2">Sign In</SignInButton>
-        </SignedOut>
-        <SignedIn>
-          <UserButton showName/>
-        </SignedIn>
-      </nav>
+  <nav class="flex flex-col space-y-4">
+    <SignedOut>
+      <SignInButton
+        mode="modal"
+        class="text-white font-semibold rounded-full px-4 py-2"
+        >Sign In</SignInButton
+      >
+    </SignedOut>
+    <SignedIn>
+      <UserButton showName />
+    </SignedIn>
+    <OrganizationSwitcher />
+  </nav>
 </header>
