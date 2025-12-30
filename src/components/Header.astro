@@ -45,7 +45,10 @@ import OxxoLogo from "./OxxoLogo.astro";
     </SignedOut>
     <SignedIn>
       <UserButton showName />
-      <OrganizationSwitcher afterSelectOrganizationUrl={Astro.url.pathname} />
+      <OrganizationSwitcher
+        afterSelectOrganizationUrl={Astro.url.pathname}
+        afterSelectPersonalUrl={Astro.url.pathname}
+      />
     </SignedIn>
   </nav>
 </header>
