@@ -105,7 +105,7 @@ export default function TableValidate() {
         <div className="w-full space-y-2">
             {/* Table Container */}
             <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700">
-                <table className="w-full border-collapse bg-white dark:bg-gray-800">
+                <table className="w-full border-collapse bg-white dark:bg-[#303030]">
                     <thead>
                         <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
@@ -194,7 +194,7 @@ export default function TableValidate() {
             </div>
 
             {/* Pagination Controls */}
-            <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-[#303030] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-4">
                     <button
                         onClick={downloadCSV}
