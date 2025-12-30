@@ -15,6 +15,7 @@
     "@clerk/astro": "^2.14.1",
     "@clerk/localizations": "^3.26.3",
     "@clerk/themes": "^2.4.29",
+    "@fontsource/titillium-web": "^5.2.8",
     "@supabase/supabase-js": "^2.76.1",
     "@tailwindcss/vite": "^4.1.15",
     "@types/react": "^19.2.2",

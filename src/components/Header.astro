@@ -19,22 +19,22 @@ import OxxoLogo from "./OxxoLogo.astro";
       <a href="/" class="cursor-pointer">
         <img src="/logo1.png" alt="Ingenieria logo" width="90" height="90" />
       </a>
-      <h1 class="text-white font-bold">INGENIERÍA</h1>
-      <h4 class="text-white">SOLUCIONES RH, FINANZAS</h4>
-      <h4 class="text-white">Y CADENA DE SUMINISTRO</h4>
+      <h1 class="text-black font-bold">INGENIERÍA</h1>
+      <h4 class="text-black">SOLUCIONES RH, FINANZAS</h4>
+      <h4 class="text-black">Y CADENA DE SUMINISTRO</h4>
     </div>
   </div>
   <nav class="flex flex-col space-y-4">
     <SignedOut>
       <SignInButton
         mode="modal"
-        class="text-white font-semibold rounded-full px-4 py-2"
-        >Sign In</SignInButton
+        class="text-black bg-[#ffc627] font-semibold hover:shadow-xl hover:scale-105 rounded-full px-4 py-2"
+        >Iniciar sesión</SignInButton
       >
     </SignedOut>
     <SignedIn>
       <UserButton showName />
+      <OrganizationSwitcher />
     </SignedIn>
-    <OrganizationSwitcher />
   </nav>
 </header>

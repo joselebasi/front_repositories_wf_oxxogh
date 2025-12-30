@@ -15,6 +15,9 @@ const data: WfRepositoryData | null = result.error ? null : result.data;
 
 ---
 <Layout title={`Repository ${id} Details`}>
-  <RepositoryInfo name={data?.name} tipo={data?.wf_repositories_data_id_type_repository_fkey.name} />
-  <RepositoryLog id_repository={id} userName={userName} />
+  <RepositoryInfo 
+  name={data?.name} 
+  tipo={data?.wf_repositories_data_id_type_repository_fkey.name} 
+  />
+  <RepositoryLog id_repository={id} userName={userName} client:load/>
 </Layout>

@@ -1,2 +1,7 @@
 @import "tailwindcss";
 @import '@clerk/themes/shadcn.css';
+@import "@fontsource/titillium-web/index.css";
+
+html, body {
+	font-family: 'Titillium Web', Arial, Helvetica, sans-serif;
+}

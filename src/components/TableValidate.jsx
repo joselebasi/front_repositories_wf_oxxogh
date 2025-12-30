@@ -5,7 +5,7 @@ export default function TableValidate() {
     const [members, setMembers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
-    const itemsPerPage = 50;
+    const itemsPerPage = 10;
 
     useEffect(() => {
         const fetchMembers = async () => {
@@ -70,8 +70,39 @@ export default function TableValidate() {
         return `${day}/${month}/${year}`;
     };
 
+    const downloadCSV = () => {
+        const headers = ['Member Username', 'Email', 'Last Contribution', 'Inactive Days', 'Team'];
+        const csvContent = [
+            headers.join(','),
+            ...members.map(member => {
+                const teams = member.bo_member_team && member.bo_member_team.length > 0
+                    ? member.bo_member_team.map(t => t.team).join('; ')
+                    : 'Sin Team';
+                return [
+                    member.member_username,
+                    member.email || 'N/A',
+                    member.last_contribution_date ? new Date(member.last_contribution_date).toISOString().split('T')[0] : 'N/A',
+                    member.inactive_days,
+                    `"${teams}"`
+                ].join(',');
+            })
+        ].join('\n');
+
+        const blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        if (link.download !== undefined) {
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', 'members_activity.csv');
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    };
+
     return (
-        <div className="w-full space-y-4">
+        <div className="w-full space-y-2">
             {/* Table Container */}
             <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700">
                 <table className="w-full border-collapse bg-white dark:bg-gray-800">
@@ -98,7 +129,7 @@ export default function TableValidate() {
                                 </div>
                             </th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
-                                Team
+                                Teams
                             </th>
                         </tr>
                     </thead>
@@ -151,7 +182,7 @@ export default function TableValidate() {
                                                 className="inline-flex items-center px-4 py-2 rounded-lg text-white font-bold text-xs uppercase tracking-wide shadow-lg"
                                                 style={{ background: '#de2324' }}
                                             >
-                                                Sin Team
+                                                Sin Teams
                                             </span>
                                         )}
                                     </div>
@@ -164,10 +195,21 @@ export default function TableValidate() {
 
             {/* Pagination Controls */}
             <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-                <div className="text-sm text-gray-600 dark:text-gray-300">
-                    Showing <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> to{' '}
-                    <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, sortedMembers.length)}</span> of{' '}
-                    <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedMembers.length}</span> members
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={downloadCSV}
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-black transition-all duration-200 rounded-lg shadow-md hover:shadow-lg bg-[#ffc627] hover:bg-[#e6b223] border border-gray-200 dark:border-gray-700"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        CSV
+                    </button>
+                    <div className="text-sm text-gray-600 dark:text-gray-300 border-l pl-4 border-gray-300 dark:border-gray-600">
+                        Showing <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> to{' '}
+                        <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, sortedMembers.length)}</span> of{' '}
+                        <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedMembers.length}</span> members
+                    </div>
                 </div>
 
                 <div className="flex items-center gap-2">
