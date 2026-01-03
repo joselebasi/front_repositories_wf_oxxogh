@@ -2,11 +2,6 @@
 import RepositoryTable from "@/components/RepositoryTable.jsx";
 import Layout from "@/layouts/Layout.astro";
 import { SignedIn, SignedOut, Protect } from "@clerk/astro/components";
-
-const user = Astro.locals.currentUser();
-console.log("🔍 Auth Debug:", {
-	user,
-});
 ---
 
 <Layout title="Ing Backoffice">

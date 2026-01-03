@@ -3,6 +3,19 @@ import Layout from "@/layouts/Layout.astro";
 import TableValidate from "@/components/TableValidate";
 
 const title = "Members Activity Backoffice";
+
+const { userId, orgRole, orgSlug } = Astro.locals.auth();
+console.log("🔍 Auth Debug:", {
+    userId,
+    orgRole,
+    orgSlug,
+});
+
+const hasAccess = userId && orgRole === "org:member" && orgSlug === "scm-bo";
+
+if (!hasAccess) {
+    return Astro.redirect("/");
+}
 ---
 
 <Layout title={title}>
