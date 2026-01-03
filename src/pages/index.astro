@@ -2,6 +2,8 @@
 import RepositoryTable from "@/components/RepositoryTable.jsx";
 import Layout from "@/layouts/Layout.astro";
 import { SignedIn, SignedOut, Protect } from "@clerk/astro/components";
+
+const { orgRole } = Astro.locals.auth();
 ---
 
 <Layout title="Ing Backoffice">
@@ -56,6 +58,86 @@ import { SignedIn, SignedOut, Protect } from "@clerk/astro/components";
 
 			<!-- Signed In State -->
 			<SignedIn>
+				{
+					!orgRole && (
+						<div class="max-w-2xl mx-auto mt-8 animate-fade-in">
+							<div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+								<div class="bg-gradient-to-r from-[#fec630] to-[#f5a623] h-2" />
+								<div class="p-8">
+									<div class="flex items-center justify-center w-16 h-16 bg-[#fec630]/10 rounded-full mx-auto mb-6">
+										<svg
+											class="w-8 h-8 text-[#fec630]"
+											fill="none"
+											stroke="currentColor"
+											viewBox="0 0 24 24"
+											aria-hidden="true"
+										>
+											<path
+												stroke-linecap="round"
+												stroke-linejoin="round"
+												stroke-width="2"
+												d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+											/>
+										</svg>
+									</div>
+									<h2 class="text-2xl font-bold text-gray-900 text-center mb-4">
+										Acceso Restringido
+									</h2>
+									<p class="text-gray-600 text-center text-lg mb-8">
+										Lo sentimos, actualmente no cuentas con
+										roles asignados para acceder a las
+										herramientas de la plataforma.
+									</p>
+									<div class="bg-slate-50 border-l-4 border-[#fec630] p-6 rounded-r-xl">
+										<p class="text-sm text-gray-600 font-medium mb-3 uppercase tracking-wider">
+											Cómo obtener acceso
+										</p>
+										<p class="text-gray-700 mb-4">
+											Por favor, ponte en contacto con el
+											administrador del sistema para
+											solicitar los permisos necesarios:
+										</p>
+										<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 bg-white rounded-lg border border-gray-100 shadow-sm">
+											<div class="flex items-center space-x-3">
+												<div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500">
+													JT
+												</div>
+												<div>
+													<p class="font-bold text-gray-900">
+														Jose Toledano
+													</p>
+													<p class="text-sm text-gray-500">
+														Administrador del
+														Sistema
+													</p>
+												</div>
+											</div>
+											<a
+												href="mailto:jose.toledano@axity.com"
+												class="inline-flex items-center justify-center px-4 py-2 bg-[#fec630] hover:bg-[#f5a623] text-white font-semibold rounded-lg transition-colors duration-200 group"
+											>
+												<svg
+													class="w-4 h-4 mr-2"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														stroke-linecap="round"
+														stroke-linejoin="round"
+														stroke-width="2"
+														d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+													/>
+												</svg>
+												jose.toledano@axity.com
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					)
+				}
 				<!-- Member Navigation -->
 				<Protect role="org:member">
 					<div class="max-w-4xl mx-auto">
