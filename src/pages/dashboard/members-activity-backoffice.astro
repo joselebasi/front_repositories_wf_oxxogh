@@ -11,7 +11,7 @@ console.log("🔍 Auth Debug:", {
     orgSlug,
 });
 
-const hasAccess = userId && (orgSlug === "scm-automatizador" || orgSlug === "scm-coordinador" || orgRole === "scm-habilitador");
+const hasAccess = userId && (orgSlug?.startsWith("scm-"));
 
 if (!hasAccess) {
     return Astro.redirect("/");

@@ -1,6 +1,19 @@
 ---
 import TechnicalLeaderForm from "@/components/TechnicalLeaderForm.jsx";
 import Layout from "@/layouts/Layout.astro";
+
+const { userId, orgRole, orgSlug } = Astro.locals.auth();
+console.log("🔍 Auth Debug:", {
+    userId,
+    orgRole,
+    orgSlug,
+});
+
+const hasAccess = userId && (orgSlug?.startsWith("scm-admin"));
+
+if (!hasAccess) {
+    return Astro.redirect("/");
+}
 ---
 
 <Layout>

@@ -13,6 +13,19 @@ import type { WfRepositoryData } from '@/actions/wf_repositories_data';
 const result = await Astro.callAction(actions.wf_repositories_data.getWfRepositoriesDataById, { id: Number(id) });
 const data: WfRepositoryData | null = result.error ? null : result.data;
 
+const { userId, orgRole, orgSlug } = Astro.locals.auth();
+console.log("🔍 Auth Debug:", {
+    userId,
+    orgRole,
+    orgSlug,
+});
+
+const hasAccess = userId && (orgSlug?.startsWith("scm-admin"));
+
+if (!hasAccess) {
+    return Astro.redirect("/");
+}
+
 ---
 <Layout title={`Repository ${id} Details`}>
   <RepositoryInfo 
