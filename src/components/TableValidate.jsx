@@ -5,6 +5,8 @@ export default function TableValidate() {
     const [members, setMembers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
+    const [typeFilter, setTypeFilter] = useState('All');
+    const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -22,8 +24,20 @@ export default function TableValidate() {
         fetchMembers();
     }, []);
 
+    // List of unique member types for filter
+    const memberTypes = ['All', ...new Set(members.map(m => m.member_type).filter(Boolean))];
+
+    // Filter members by type AND search term
+    const filteredMembers = members.filter(member => {
+        const matchesType = typeFilter === 'All' || member.member_type === typeFilter;
+        const matchesSearch =
+            member.member_username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            (member.email && member.email.toLowerCase().includes(searchTerm.toLowerCase()));
+        return matchesType && matchesSearch;
+    });
+
     // Sort members by inactive days
-    const sortedMembers = [...members].sort((a, b) => {
+    const sortedMembers = [...filteredMembers].sort((a, b) => {
         if (sortOrder === 'desc') {
             return b.inactive_days - a.inactive_days;
         }
@@ -71,16 +85,17 @@ export default function TableValidate() {
     };
 
     const downloadCSV = () => {
-        const headers = ['Member Username', 'Email', 'Last Contribution', 'Inactive Days', 'Team'];
+        const headers = ['Member Username', 'Email', 'Member Type', 'Last Contribution', 'Inactive Days', 'Team'];
         const csvContent = [
             headers.join(','),
-            ...members.map(member => {
+            ...sortedMembers.map(member => {
                 const teams = member.bo_member_team && member.bo_member_team.length > 0
                     ? member.bo_member_team.map(t => t.team).join('; ')
                     : 'Sin Team';
                 return [
                     member.member_username,
                     member.email || 'N/A',
+                    member.member_type || 'N/A',
                     member.last_contribution_date ? new Date(member.last_contribution_date).toISOString().split('T')[0] : 'N/A',
                     member.inactive_days,
                     `"${teams}"`
@@ -102,7 +117,63 @@ export default function TableValidate() {
     };
 
     return (
-        <div className="w-full space-y-2">
+        <div className="w-full space-y-4">
+            {/* Header / Filter Section */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 bg-white dark:bg-[#303030] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <div className="flex flex-col md:flex-row items-center gap-4 flex-1">
+                    {/* Search Input */}
+                    <div className="relative w-full md:w-64">
+                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg className="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            placeholder="Buscar miembro o email..."
+                            value={searchTerm}
+                            onChange={(e) => {
+                                setSearchTerm(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-[#404040] text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all duration-200"
+                        />
+                    </div>
+
+                    {/* Filter Dropdown */}
+                    <div className="flex items-center gap-2 w-full md:w-auto">
+                        <label htmlFor="typeFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                            Filtrar por Tipo:
+                        </label>
+                        <select
+                            id="typeFilter"
+                            value={typeFilter}
+                            onChange={(e) => {
+                                setTypeFilter(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-48"
+                        >
+                            {memberTypes.map(type => (
+                                <option key={type} value={type}>{type}</option>
+                            ))}
+                        </select>
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <button
+                        onClick={downloadCSV}
+                        className="flex items-center gap-2 px-6 py-2 text-sm font-bold text-black transition-all duration-200 rounded-lg shadow-md hover:shadow-lg bg-[#ffc627] hover:bg-[#e6b223] border border-gray-200 dark:border-gray-700 w-full md:w-auto justify-center"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        Exportar CSV
+                    </button>
+                </div>
+            </div>
+
             {/* Table Container */}
             <div className="overflow-x-auto rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700">
                 <table className="w-full border-collapse bg-white dark:bg-[#303030]">
@@ -113,6 +184,9 @@ export default function TableValidate() {
                             </th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
                                 Email
+                            </th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
+                                Member Type
                             </th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
                                 Last Contribution
@@ -151,6 +225,9 @@ export default function TableValidate() {
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     {member.email || 'N/A'}
+                                </td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
+                                    {member.member_type || 'N/A'}
                                 </td>
                                 <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     {formatDate(member.last_contribution_date)}
@@ -196,16 +273,7 @@ export default function TableValidate() {
             {/* Pagination Controls */}
             <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-[#303030] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-4">
-                    <button
-                        onClick={downloadCSV}
-                        className="flex items-center gap-2 px-4 py-2 text-sm font-bold text-black transition-all duration-200 rounded-lg shadow-md hover:shadow-lg bg-[#ffc627] hover:bg-[#e6b223] border border-gray-200 dark:border-gray-700"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        CSV
-                    </button>
-                    <div className="text-sm text-gray-600 dark:text-gray-300 border-l pl-4 border-gray-300 dark:border-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
                         Mostrando <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> de{' '}
                         <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, sortedMembers.length)}</span> de{' '}
                         <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedMembers.length}</span> miembros

@@ -10,7 +10,7 @@ export type MemberActivity = {
   last_contribution_date: string;
   member_id: number;
   inactive_days: number;
-
+  member_type: string;
   // relación 1 → N
   bo_member_team: {
     id: number;
@@ -34,6 +34,7 @@ export const bo_members_activity_fk_data = {
           last_contribution_date,
           member_id,
           inactive_days,
+          member_type,
           bo_member_team (
             id,
             team
