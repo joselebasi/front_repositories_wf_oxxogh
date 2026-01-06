@@ -9,7 +9,7 @@ console.log("🔍 Auth Debug:", {
     orgSlug,
 });
 
-const hasAccess = userId && (orgSlug?.startsWith("scm-admin"));
+const hasAccess = userId && (orgSlug === "scm-admin");
 
 if (!hasAccess) {
     return Astro.redirect("/");
