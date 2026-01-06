@@ -28,12 +28,22 @@ export default function TableValidate() {
     // List of unique member types for filter
     const memberTypes = ['All', ...new Set(members.map(m => m.member_type).filter(Boolean))];
     // List of unique teams for filter
-    const allTeams = ['All', ...Array.from(new Set(members.flatMap(m => (m.bo_member_team || []).map(t => t.team)))).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }))];
+    const hasSinTeams = members.some(m => !m.bo_member_team || m.bo_member_team.length === 0);
+    let allTeamsSorted = Array.from(new Set(members.flatMap(m => (m.bo_member_team || []).map(t => t.team)))).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+    if (hasSinTeams) allTeamsSorted = ['SIN TEAMS', ...allTeamsSorted];
+    const allTeams = ['All', ...allTeamsSorted];
 
     // Filter members by type, team AND search term
     const filteredMembers = members.filter(member => {
         const matchesType = typeFilter === 'All' || member.member_type === typeFilter;
-        const matchesTeam = teamFilter === 'All' || (member.bo_member_team && member.bo_member_team.some(t => t.team === teamFilter));
+        let matchesTeam = true;
+        if (teamFilter !== 'All') {
+            if (teamFilter === 'SIN TEAMS') {
+                matchesTeam = !member.bo_member_team || member.bo_member_team.length === 0;
+            } else {
+                matchesTeam = member.bo_member_team && member.bo_member_team.some(t => t.team === teamFilter);
+            }
+        }
         const matchesSearch =
             member.member_username.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (member.email && member.email.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -95,7 +105,7 @@ export default function TableValidate() {
             ...sortedMembers.map(member => {
                 const teams = member.bo_member_team && member.bo_member_team.length > 0
                     ? member.bo_member_team.map(t => t.team).join('; ')
-                    : 'Sin Team';
+                    : 'Sin Teams';
                 return [
                     member.member_username,
                     member.email || 'N/A',
