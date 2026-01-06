@@ -6,6 +6,7 @@ export default function TableValidate() {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
     const [typeFilter, setTypeFilter] = useState('All');
+    const [teamFilter, setTeamFilter] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 10;
 
@@ -26,14 +27,17 @@ export default function TableValidate() {
 
     // List of unique member types for filter
     const memberTypes = ['All', ...new Set(members.map(m => m.member_type).filter(Boolean))];
+    // List of unique teams for filter
+    const allTeams = ['All', ...Array.from(new Set(members.flatMap(m => (m.bo_member_team || []).map(t => t.team)))).sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }))];
 
-    // Filter members by type AND search term
+    // Filter members by type, team AND search term
     const filteredMembers = members.filter(member => {
         const matchesType = typeFilter === 'All' || member.member_type === typeFilter;
+        const matchesTeam = teamFilter === 'All' || (member.bo_member_team && member.bo_member_team.some(t => t.team === teamFilter));
         const matchesSearch =
             member.member_username.toLowerCase().includes(searchTerm.toLowerCase()) ||
             (member.email && member.email.toLowerCase().includes(searchTerm.toLowerCase()));
-        return matchesType && matchesSearch;
+        return matchesType && matchesTeam && matchesSearch;
     });
 
     // Sort members by inactive days
@@ -140,10 +144,10 @@ export default function TableValidate() {
                         />
                     </div>
 
-                    {/* Filter Dropdown */}
+                    {/* Filter Dropdowns */}
                     <div className="flex items-center gap-2 w-full md:w-auto">
                         <label htmlFor="typeFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                            Filtrar por Tipo:
+                            Tipo:
                         </label>
                         <select
                             id="typeFilter"
@@ -152,10 +156,26 @@ export default function TableValidate() {
                                 setTypeFilter(e.target.value);
                                 setCurrentPage(1);
                             }}
-                            className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-48"
+                            className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-36"
                         >
                             {memberTypes.map(type => (
                                 <option key={type} value={type}>{type}</option>
+                            ))}
+                        </select>
+                        <label htmlFor="teamFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap ml-2">
+                            Team:
+                        </label>
+                        <select
+                            id="teamFilter"
+                            value={teamFilter}
+                            onChange={(e) => {
+                                setTeamFilter(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-36"
+                        >
+                            {allTeams.map(team => (
+                                <option key={team} value={team}>{team}</option>
                             ))}
                         </select>
                     </div>
