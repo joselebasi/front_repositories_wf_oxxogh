@@ -384,34 +384,34 @@ export default function TableValidate() {
                 </div>
             </div>
             {/* ------------------------- */}
-{/*        PIE CHART          */}
-{/* ------------------------- */}
-<div className="p-6 bg-white dark:bg-[#303030] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mt-6">
-    <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">
-        Distribución Member vs Owner
-    </h2>
+            {/*        PIE CHART          */}
+            {/* ------------------------- */}
+            <div className="p-6 bg-white dark:bg-[#303030] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mt-6">
+                <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">
+                    Distribución Member vs Owner
+                </h2>
 
-    <div style={{ width: '100%', height: 320 }}>
-        <ResponsiveContainer>
-            <PieChart>
-                <Pie
-                    data={pieData}
-                    cx="50%"
-                    cy="50%"
-                    outerRadius={120}
-                    dataKey="value"
-                    label={({ name, value }) => `${name}: ${value}`}
-                >
-                    {pieData.map((entry, index) => (
-                        <Cell key={index} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-                <Tooltip />
-                <Legend />
-            </PieChart>
-        </ResponsiveContainer>
-    </div>
-</div>
+                <div style={{ width: '100%', height: 320 }}>
+                    <ResponsiveContainer>
+                        <PieChart>
+                            <Pie
+                                data={pieData}
+                                cx="50%"
+                                cy="50%"
+                                outerRadius={120}
+                                dataKey="value"
+                                label={({ name, value }) => `${name}: ${value}`}
+                            >
+                                {pieData.map((entry, index) => (
+                                    <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                            <Tooltip />
+                            <Legend />
+                        </PieChart>
+                    </ResponsiveContainer>
+                </div>
+            </div>
 
         </div>
         
