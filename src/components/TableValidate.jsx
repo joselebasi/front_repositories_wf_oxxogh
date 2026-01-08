@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { actions } from 'astro:actions';
+import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function TableValidate() {
     const [members, setMembers] = useState([]);
@@ -129,6 +130,17 @@ export default function TableValidate() {
             document.body.removeChild(link);
         }
     };
+
+    // ---- DATA PARA PIE CHART ----
+    const ownerCount = filteredMembers.filter(m => m.member_type === 'Owner').length;
+    const memberCount = filteredMembers.filter(m => m.member_type === 'Member').length;
+
+    const pieData = [
+        { name: 'Owner', value: ownerCount },
+        { name: 'Member', value: memberCount },
+    ];
+
+    const COLORS = ['#ffc627', '#b78c1e'];
 
     return (
         <div className="w-full space-y-4">
@@ -371,6 +383,37 @@ export default function TableValidate() {
                     </button>
                 </div>
             </div>
+            {/* ------------------------- */}
+{/*        PIE CHART          */}
+{/* ------------------------- */}
+<div className="p-6 bg-white dark:bg-[#303030] rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 mt-6">
+    <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">
+        Distribución Member vs Owner
+    </h2>
+
+    <div style={{ width: '100%', height: 320 }}>
+        <ResponsiveContainer>
+            <PieChart>
+                <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="50%"
+                    outerRadius={120}
+                    dataKey="value"
+                    label={({ name, value }) => `${name}: ${value}`}
+                >
+                    {pieData.map((entry, index) => (
+                        <Cell key={index} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                </Pie>
+                <Tooltip />
+                <Legend />
+            </PieChart>
+        </ResponsiveContainer>
+    </div>
+</div>
+
         </div>
+        
     );
 }
