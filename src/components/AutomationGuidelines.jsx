@@ -85,105 +85,98 @@ const activities_cloud = [
 const activities_onpremise = [
     {
         no: 1,
-        activity: "Solicitar la prioridad del repositorio para analisis de desacoplamiento y automatizacion",
+        activity: "Solicitar la prioridad del repositorio para análisis de desacoplamiento y automatización.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "4 hrs."
     },
     {
         no: 2,
-        activity: "Validacion de line base del codigo fuente en el repositorio, solicitar ultimo CHO y se pide la confirmacion de que es una aplicacion productiva asi como la ultima version instalada ejemplo v3.4.5 o en proceso de llegar a produccion.",
+        activity: "Confirmación de la línea base del código fuente en el repositorio, de acuerdo con el último CHO. Se solicita la confirmación de que es una aplicación productiva, así como la última versión instalada (por ejemplo, v3.4.5) o si se encuentra en proceso de llegar a producción.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "8 hrs."
     },
     {
         no: 3,
-        activity: "Si es un repositorio a desacoplarse se envia propuesta y se solicita confirmacion, al desacloplarse el repositorio pasa a la organizacion de github BackUp-BO",
+        activity: "Si el repositorio es candidato a desacoplarse, se envía la propuesta y se solicita confirmación. Una vez desacoplado, el repositorio pasa a la organización de GitHub BackUp-BO.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "4 hrs."
     },
     {
         no: 4,
-        activity: "Crear una tarea de automatizacion en le tablero de azure SCM-ServiceHub-StaffIng",
+        activity: "Crear una tarea de automatización en el tablero de Azure SCM-ServiceHub-StaffIng.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
         no: 5,
-        activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (Solo una tarea para todos los ambientes.)",
+        activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (una sola tarea para todos los ambientes).",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
         no: 6,
-        activity: "Proporcionar detalles técnicos de compilación y contruccion con el CLI de la tecnologia usada por ejemplo msbuild o maven incluyendo comandos, dependencias, que tipo de artefacto generara (EAR, WAR, DLL, ejecutables) y configuraciones necesarias",
+        activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada, por ejemplo, MSBuild con .NET o Maven con Java, incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
         no: 7,
-        activity: "Proporcionar en la tarea de azure como manejan los secretos y que variables cambian por ambiente (variable de github)",
+        activity: "Proporcionar en la tarea de Azure la forma en que se manejan los secretos y qué variables cambian por ambiente, utilizando variables de GitHub.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
         no: 8,
-        activity: "Las siguientes 3 activades dependen que la iniciativa tenga el rol coordinador de seguridad asignado, de lo contrario se usara github secrets",
-        responsible: "SCM Automatizador",
-        requestedBy: "Líder Técnico (LT)",
-        estimatedTime: "30 min."
+        activity: "Las siguientes tres actividades dependen de que la iniciativa tenga asignado el rol de Coordinador de Seguridad; de lo contrario, se utilizarán GitHub Secrets.",
+        responsible: "",
+        requestedBy: "",
+        estimatedTime: ""
     },
     {
         no: 9,
-        activity: "Creación de ticket para bóveda en Conjur (Una tarea por ambiente.)",
-        responsible: "Accenture",
-        requestedBy: "Coordinador de Seguridad",
-        estimatedTime: "SLA Accenture"
-    },
-    {
-        no: 10,
-        activity: "Crear GitHub Actions para compilación y construccion (Una tarea por ambiente.)",
+        activity: "Crear GitHub Actions para la compilación y construcción (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "10 hrs."
     },
     {
+        no: 10,
+        activity: "Creación de ticket para la bóveda en Conjur (una tarea por ambiente).",
+        responsible: "Accenture",
+        requestedBy: "Coordinador de Seguridad",
+        estimatedTime: "SLA Accenture"
+    },
+    {
         no: 11,
-        activity: "Creación de ticket para secretos en Conjur (Una tarea por ambiente.)",
+        activity: "Creación de ticket para la gestión de secretos en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
         no: 12,
-        activity: "Configuración de pipelines para recuperar los secretos de Conjur. - Solicitar archivo de configuración que almacena los secretos (Una tarea por ambiente.)",
+        activity: "Configuración de pipelines para la recuperación de secretos desde Conjur. Solicitar el archivo de configuración que almacena los secretos (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "8 hrs."
     },
     {
         no: 13,
-        activity: "Definir estrategia de versionamiento de artefactos (EAR, WAR, DLL, ejecutables) y nomenclatura de paquetes",
-        responsible: "Líder Técnico (LT)",
-        requestedBy: "SCM Automatizador",
-        estimatedTime: "30 min."
-    },
-    {
-        no: 14,
-        activity: "Validacion del artefacto generado en la ruta sharepoint compatida en la tarea de azure. nota: el artefacto que se comparta en sharepoint no debe ser modificado ya debe traer tanto los secretos como las variables necesarias para su funcionamiento",
+        activity: "Se comparte la ruta de SharePoint en el sitio WFyWeb para la validación del artefacto generado en la tarea de Azure. Nota: el artefacto que se comparta en SharePoint no debe ser modificado; debe incluir tanto los secretos como las variables necesarias para su funcionamiento, y solo se manejará un SharePoint para todos los aplicativos de WF.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
-        no: 15,
-        activity: "Sesion de entrega del action y explicacion de los release y pre-release de github que se generan asi como el versionamiento semantico manejado por github y en los artefactos de sharepoint",
+        no: 14,
+        activity: "Sesión de entrega del action y explicación de los releases y pre-releases de GitHub que se generan, así como del versionamiento semántico manejado en GitHub y en los artefactos de SharePoint.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
