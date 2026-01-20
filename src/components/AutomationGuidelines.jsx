@@ -184,7 +184,7 @@ const activities_onpremise = [
 ];
 
 export default function AutomationGuidelines() {
-    const [deploymentType, setDeploymentType] = useState('cloud');
+    const [deploymentType, setDeploymentType] = useState('onpremise');
 
     const currentActivities = deploymentType === 'cloud' ? activities_cloud : activities_onpremise;
 
@@ -263,7 +263,7 @@ export default function AutomationGuidelines() {
             <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <h2 className="text-3xl font-bold text-gray-900 dark:text-black mb-2">
-                        Automation Guidelines
+                        Lineamientos de automatización
                     </h2>
                 </div>
 
@@ -295,20 +295,6 @@ export default function AutomationGuidelines() {
                 <div className="border-b border-gray-200 dark:border-gray-700">
                     <nav className="flex gap-4" aria-label="Tabs">
                         <button
-                            onClick={() => setDeploymentType('cloud')}
-                            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors duration-200 ${deploymentType === 'cloud'
-                                ? 'border-[#fec630] text-[#fec630]'
-                                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
-                                }`}
-                        >
-                            <div className="flex items-center gap-2">
-                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
-                                </svg>
-                                Cloud (Azure / App Services)
-                            </div>
-                        </button>
-                        <button
                             onClick={() => setDeploymentType('onpremise')}
                             className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors duration-200 ${deploymentType === 'onpremise'
                                 ? 'border-[#fec630] text-[#fec630]'
@@ -320,6 +306,20 @@ export default function AutomationGuidelines() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"></path>
                                 </svg>
                                 On-Premise (IIS / WebLogic)
+                            </div>
+                        </button>
+                        <button
+                            onClick={() => setDeploymentType('cloud')}
+                            className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors duration-200 ${deploymentType === 'cloud'
+                                ? 'border-[#fec630] text-[#fec630]'
+                                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
+                                }`}
+                        >
+                            <div className="flex items-center gap-2">
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+                                </svg>
+                                Cloud (Azure / App Services)
                             </div>
                         </button>
                     </nav>
