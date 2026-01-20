@@ -85,48 +85,69 @@ const activities_cloud = [
 const activities_onpremise = [
     {
         no: 1,
+        activity: "Solicitar la prioridad del repositorio para analisis de desacoplamiento y automatizacion",
+        responsible: "SCM Habilitador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "4 hrs."
+    },
+    {
+        no: 2,
+        activity: "Analizar estatus de codigo fuente en el repositorio, si es candidato a desacoplamiento, solicitar ultimo CHO y si esta productivo de acuerdo a prioridades establecidas en el punto anterior",
+        responsible: "SCM Habilitador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "8 hrs."
+    },
+    {
+        no: 3,
+        activity: "Si es desacoplado o quedo en un solo repositorio, se solicita el analisis de la tecnologia .)",
+        responsible: "SCM Habilitador",
+        requestedBy: "SCM Automatizador",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 4,
         activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (Solo una tarea para todos los ambientes.)",
         responsible: "Líder Técnico (LT)",
         requestedBy: "",
         estimatedTime: "30 min."
     },
     {
-        no: 2,
+        no: 5,
         activity: "Proporcionar detalles técnicos de compilación con MSBuild (.NET) o Maven (Java) incluyendo comandos, dependencias y configuraciones necesarias",
         responsible: "Dev Team",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
-        no: 3,
+        no: 6,
         activity: "Proporcionar estructura de archivos de configuración del proyecto (.csproj, pom.xml, web.config, etc.)",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
-        no: 4,
+        no: 7,
         activity: "Definir estrategia de versionamiento de artefactos (EAR, WAR, DLL, ejecutables) y nomenclatura de paquetes",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
-        no: 5,
+        no: 8,
         activity: "Crear GitHub Actions para compilación con MSBuild (aplicaciones .NET) - Configurar workflow de build",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "2 hrs."
     },
     {
-        no: 6,
+        no: 9,
         activity: "Crear GitHub Actions para compilación con Maven (aplicaciones Java) - Configurar workflow de build y generación de EAR/WAR",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "2 hrs."
     },
     {
-        no: 7,
+        no: 10,
         activity: "Configurar almacenamiento de artefactos generados (GitHub Releases, Artifactory, Nexus u otro repositorio de binarios)",
         responsible: "SCM Automatizador",
         requestedBy: "",
@@ -213,7 +234,7 @@ export default function AutomationGuidelines() {
             {/* Header */}
             <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                    <h2 className="text-3xl font-bold text-gray-900 dark:text-black mb-2">
                         Automation Guidelines
                     </h2>
                 </div>
@@ -248,8 +269,8 @@ export default function AutomationGuidelines() {
                         <button
                             onClick={() => setDeploymentType('cloud')}
                             className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors duration-200 ${deploymentType === 'cloud'
-                                    ? 'border-[#fec630] text-[#fec630]'
-                                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
+                                ? 'border-[#fec630] text-[#fec630]'
+                                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
                                 }`}
                         >
                             <div className="flex items-center gap-2">
@@ -262,8 +283,8 @@ export default function AutomationGuidelines() {
                         <button
                             onClick={() => setDeploymentType('onpremise')}
                             className={`px-6 py-3 text-sm font-semibold border-b-2 transition-colors duration-200 ${deploymentType === 'onpremise'
-                                    ? 'border-[#fec630] text-[#fec630]'
-                                    : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
+                                ? 'border-[#fec630] text-[#fec630]'
+                                : 'border-transparent text-gray-500 dark:text-gray-400 hover:text-[#fec630]'
                                 }`}
                         >
                             <div className="flex items-center gap-2">
@@ -338,8 +359,8 @@ export default function AutomationGuidelines() {
             </div>
 
             {/* Table Info */}
-            <div className="mt-4 text-sm text-gray-600 dark:text-gray-400">
-                Total de actividades: <span className="font-semibold text-gray-900 dark:text-white">{currentActivities.length}</span>
+            <div className="mt-4 text-sm text-gray-600">
+                Total de actividades: <span className="font-semibold text-gray-900">{currentActivities.length}</span>
             </div>
         </section>
     );
