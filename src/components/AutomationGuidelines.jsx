@@ -92,65 +92,100 @@ const activities_onpremise = [
     },
     {
         no: 2,
-        activity: "Analizar estatus de codigo fuente en el repositorio, si es candidato a desacoplamiento, solicitar ultimo CHO y si esta productivo de acuerdo a prioridades establecidas en el punto anterior",
+        activity: "Validacion de line base del codigo fuente en el repositorio, solicitar ultimo CHO y se pide la confirmacion de que es una aplicacion productiva asi como la ultima version instalada ejemplo v3.4.5 o en proceso de llegar a produccion.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "8 hrs."
     },
     {
         no: 3,
-        activity: "Si es desacoplado o quedo en un solo repositorio, se solicita el analisis de la tecnologia .)",
+        activity: "Si es un repositorio a desacoplarse se envia propuesta y se solicita confirmacion, al desacloplarse el repositorio pasa a la organizacion de github BackUp-BO",
         responsible: "SCM Habilitador",
-        requestedBy: "SCM Automatizador",
-        estimatedTime: "30 min."
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "4 hrs."
     },
     {
         no: 4,
-        activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (Solo una tarea para todos los ambientes.)",
-        responsible: "Líder Técnico (LT)",
-        requestedBy: "",
+        activity: "Crear una tarea de automatizacion en le tablero de azure SCM-ServiceHub-StaffIng",
+        responsible: "SCM Automatizador",
+        requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
         no: 5,
-        activity: "Proporcionar detalles técnicos de compilación con MSBuild (.NET) o Maven (Java) incluyendo comandos, dependencias y configuraciones necesarias",
-        responsible: "Dev Team",
-        requestedBy: "SCM Automatizador",
-        estimatedTime: "1 hr."
-    },
-    {
-        no: 6,
-        activity: "Proporcionar estructura de archivos de configuración del proyecto (.csproj, pom.xml, web.config, etc.)",
+        activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (Solo una tarea para todos los ambientes.)",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
+        no: 6,
+        activity: "Proporcionar detalles técnicos de compilación y contruccion con el CLI de la tecnologia usada por ejemplo msbuild o maven incluyendo comandos, dependencias, que tipo de artefacto generara (EAR, WAR, DLL, ejecutables) y configuraciones necesarias",
+        responsible: "Líder Técnico (LT)",
+        requestedBy: "SCM Automatizador",
+        estimatedTime: "1 hr."
+    },
+    {
         no: 7,
+        activity: "Proporcionar en la tarea de azure como manejan los secretos y que variables cambian por ambiente (variable de github)",
+        responsible: "SCM Automatizador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 8,
+        activity: "Las siguientes 3 activades dependen que la iniciativa tenga el rol coordinador de seguridad asignado, de lo contrario se usara github secrets",
+        responsible: "SCM Automatizador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 9,
+        activity: "Creación de ticket para bóveda en Conjur (Una tarea por ambiente.)",
+        responsible: "Accenture",
+        requestedBy: "Coordinador de Seguridad",
+        estimatedTime: "SLA Accenture"
+    },
+    {
+        no: 10,
+        activity: "Crear GitHub Actions para compilación y construccion (Una tarea por ambiente.)",
+        responsible: "SCM Automatizador",
+        requestedBy: "",
+        estimatedTime: "10 hrs."
+    },
+    {
+        no: 11,
+        activity: "Creación de ticket para secretos en Conjur (Una tarea por ambiente.)",
+        responsible: "Accenture",
+        requestedBy: "Coordinador de Seguridad",
+        estimatedTime: "SLA Accenture"
+    },
+    {
+        no: 12,
+        activity: "Configuración de pipelines para recuperar los secretos de Conjur. - Solicitar archivo de configuración que almacena los secretos (Una tarea por ambiente.)",
+        responsible: "SCM Automatizador",
+        requestedBy: "Coordinador de Seguridad",
+        estimatedTime: "8 hrs."
+    },
+    {
+        no: 13,
         activity: "Definir estrategia de versionamiento de artefactos (EAR, WAR, DLL, ejecutables) y nomenclatura de paquetes",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
-        no: 8,
-        activity: "Crear GitHub Actions para compilación con MSBuild (aplicaciones .NET) - Configurar workflow de build",
-        responsible: "SCM Automatizador",
-        requestedBy: "",
-        estimatedTime: "2 hrs."
+        no: 14,
+        activity: "Validacion del artefacto generado en la ruta sharepoint compatida en la tarea de azure. nota: el artefacto que se comparta en sharepoint no debe ser modificado ya debe traer tanto los secretos como las variables necesarias para su funcionamiento",
+        responsible: "Líder Técnico (LT)",
+        requestedBy: "SCM Automatizador",
+        estimatedTime: "1 hr."
     },
     {
-        no: 9,
-        activity: "Crear GitHub Actions para compilación con Maven (aplicaciones Java) - Configurar workflow de build y generación de EAR/WAR",
+        no: 15,
+        activity: "Sesion de entrega del action y explicacion de los release y pre-release de github que se generan asi como el versionamiento semantico manejado por github y en los artefactos de sharepoint",
         responsible: "SCM Automatizador",
-        requestedBy: "",
-        estimatedTime: "2 hrs."
-    },
-    {
-        no: 10,
-        activity: "Configurar almacenamiento de artefactos generados (GitHub Releases, Artifactory, Nexus u otro repositorio de binarios)",
-        responsible: "SCM Automatizador",
-        requestedBy: "",
+        requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
     }
 ];
