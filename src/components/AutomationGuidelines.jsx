@@ -85,7 +85,7 @@ const activities_cloud = [
 const activities_onpremise = [
     {
         no: 1,
-        activity: "Las tareas 1, 2, 3 solo aplican para repositorios migrados de SVN si es un repositorio nuevo empezar en la tarea 5.",
+        activity: "Las tareas 2, 3, 4 solo aplican para repositorios migrados de SVN si es un repositorio nuevo empezar en la tarea 5.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
