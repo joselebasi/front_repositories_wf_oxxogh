@@ -134,7 +134,7 @@ const activities_onpremise = [
     },
     {
         no: 8,
-        activity: "Hacer las recomenciones de buenas practicas de github como el .gitignore para solo el codigo fuente este en el repositorio.",
+        activity: "Hacer las recomenciones de buenas practicas de github como el .gitignore para solo el codigo fuente debe estar en el repositorio, por ejemplo no debe haber archivos binarios, secretos, etc.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
