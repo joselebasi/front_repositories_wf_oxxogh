@@ -85,21 +85,21 @@ const activities_cloud = [
 const activities_onpremise = [
     {
         no: 1,
-        activity: "Las tareas 2, 3, 4 solo aplican para repositorios migrados de SVN si es un repositorio nuevo empezar en la tarea 5.",
+        activity: "Las tareas 2, 3 y 4 solo aplican para repositorios migrados de SVN. Si es un repositorio nuevo, iniciar en la tarea 5.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
     },
     {
         no: 2,
-        activity: "Solicitar la prioridad del repositorio para análisis de desacoplamiento y automatización.",
+        activity: "Solicitar la prioridad del repositorio para el análisis de desacoplamiento y automatización.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "4 hrs."
     },
     {
         no: 3,
-        activity: "Confirmación de la línea base del código fuente en el repositorio, de acuerdo con el último CHO. Se solicita la confirmación de que es una aplicación productiva, así como la última versión instalada (por ejemplo, v3.4.5) o si se encuentra en proceso de llegar a producción.",
+        activity: "Confirmar la línea base del código fuente en el repositorio, de acuerdo con el último CHO. Se solicita confirmar que es una aplicación productiva, así como la última versión instalada (por ejemplo, v3.4.5) o si se encuentra en proceso de llegar a producción.",
         responsible: "SCM Habilitador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "8 hrs."
@@ -134,61 +134,70 @@ const activities_onpremise = [
     },
     {
         no: 8,
+        activity: "Hacer las recomenciones de buenas practicas de github como el .gitignore para solo el codigo fuente este en el repositorio.",
+        responsible: "SCM Automatizador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 9,
         activity: "Proporcionar en la tarea de Azure la forma en que se manejan los secretos y qué variables cambian por ambiente, utilizando variables de GitHub.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
-        no: 9,
+        no: 10,
         activity: "Las siguientes tres actividades dependen de que la iniciativa tenga asignado el rol de Coordinador de Seguridad; de lo contrario, se utilizarán GitHub Secrets.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
     },
     {
-        no: 10,
+        no: 11,
         activity: "Crear GitHub Actions para la compilación y construcción (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "10 hrs."
     },
     {
-        no: 11,
-        activity: "Creación de ticket para la bóveda en Conjur (una tarea por ambiente).",
-        responsible: "Accenture",
-        requestedBy: "Coordinador de Seguridad",
-        estimatedTime: "SLA Accenture"
-    },
-    {
         no: 12,
-        activity: "Creación de ticket para la gestión de secretos en Conjur (una tarea por ambiente).",
+        activity: "Creación de un ticket para la bóveda en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
         no: 13,
+        activity: "Creación de un ticket para la gestión de secretos en Conjur (una tarea por ambiente).",
+        responsible: "Accenture",
+        requestedBy: "Coordinador de Seguridad",
+        estimatedTime: "SLA Accenture"
+    },
+    {
+        no: 14,
         activity: "Configuración de pipelines para la recuperación de secretos desde Conjur. Solicitar el archivo de configuración que almacena los secretos (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "8 hrs."
     },
     {
-        no: 14,
-        activity: "Se comparte la ruta de SharePoint en el sitio WFyWeb para la validación del artefacto generado en la tarea de Azure. Nota: el artefacto que se comparta en SharePoint no debe ser modificado; debe incluir tanto los secretos como las variables necesarias para su funcionamiento, y solo se manejará un SharePoint para todos los aplicativos de WF.",
+        no: 15,
+        activity: "Compartir la ruta de SharePoint en el sitio ImplementaciónDEVSECOPS para la validación por QA (con proyecto activo). Si no se cuenta con QA, lo validará el LT. Compartir el artefacto generado en la tarea de Azure. Nota: el artefacto que se comparta en SharePoint no debe ser modificado; debe incluir tanto los secretos como las variables necesarias para su funcionamiento, y solo se manejará un SharePoint para todos los aplicativos de WF.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
-        no: 15,
-        activity: "Sesión de entrega del action y explicación de los releases y pre-releases de GitHub que se generan, así como del versionamiento semántico manejado en GitHub y en los artefactos de SharePoint.",
+        no: 16,
+        activity: "Sesión de entrega del GitHub Action y explicación de los releases y pre-releases de GitHub que se generan, así como del versionamiento semántico manejado en GitHub y en los artefactos de SharePoint.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
     }
 ];
+
+
 
 export default function AutomationGuidelines() {
     const [deploymentType, setDeploymentType] = useState('onpremise');
