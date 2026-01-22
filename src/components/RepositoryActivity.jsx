@@ -263,7 +263,7 @@ export default function RepositoryActivity() {
                     <div className="text-sm text-gray-600 dark:text-gray-300">
                         Mostrando <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> de{' '}
                         <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, sortedRepositories.length)}</span> de{' '}
-                        <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedRepositories.length}</span> repositorios
+                        <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedRepositories.length}</span> ramas
                     </div>
                 </div>
 
