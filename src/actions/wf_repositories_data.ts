@@ -35,7 +35,19 @@ export const wf_repositories_data = {
       console.log('Fetching all repositories data from wf_repositories_data table');
       const { data, error } = await supabase
         .from('wf_repositories_data')
-        .select('*');
+        .select(`
+          *,
+          id_type_repository (
+            id,
+            name,
+            short_name
+          ),
+          id_technical_leader (
+            id,
+            name,
+            email
+          )
+        `);
       if (error) {
         console.error('Error fetching repositories data:', error.message);
         return [] as WfRepositoryData[];

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { actions } from 'astro:actions';
 
-const RepositoryTable = () => {
+const RepositoryControlTable = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -30,27 +30,7 @@ const RepositoryTable = () => {
     const loadData = async () => {
       try {
         setLoading(true);
-        const storageKey = `wf_repositories_data_${selectedId}`;
-        const cacheTTL = 30 * 60 * 1000; // 30 minutos
-
-        const cached = localStorage.getItem(storageKey);
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          const isExpired = Date.now() - parsed.timestamp > cacheTTL;
-
-          if (!isExpired && parsed.data) {
-            console.log('✅ Cargando repositorios desde localStorage (vigente)');
-            setData(parsed.data);
-            setLastUpdated(new Date(parsed.timestamp));
-            setLoading(false);
-          } else {
-            console.log('⚠️ Caché expirado, actualizando...');
-            localStorage.removeItem(storageKey);
-            await fetchRepositories();
-          }
-        } else {
-          await fetchRepositories();
-        }
+        await fetchRepositories();
       } catch (err) {
         setError(err.message);
       } finally {
@@ -61,34 +41,15 @@ const RepositoryTable = () => {
     const fetchRepositories = async () => {
       console.log('🌐 Consultando repositorios desde el servidor...');
       const { data, error } = await actions.wf_repositories_data.getAllWfRepositoriesData();
+      console.log("✅ Repositorios obtenidos:", data);
       if (error) throw new Error(error.message || 'Error al obtener datos');
       setData(data);
-      const payload = { timestamp: Date.now(), data };
-      localStorage.setItem(`wf_repositories_data_${selectedId}`, JSON.stringify(payload));
-      setLastUpdated(new Date(payload.timestamp));
+      setLastUpdated(new Date());
     };
 
     const loadTechnicalLeaders = async () => {
       try {
         setTlLoading(true);
-        const storageKey = 'wf_technical_leaders';
-        const cacheTTL = 2 * 60 * 60 * 1000; // 2 horas
-
-        const cached = localStorage.getItem(storageKey);
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          const isExpired = Date.now() - parsed.timestamp > cacheTTL;
-
-          if (!isExpired && parsed.data) {
-            console.log('✅ Cargando líderes técnicos desde localStorage (vigente)');
-            setTechnicalLeaders(parsed.data);
-            setTlLoading(false);
-            return;
-          } else {
-            console.log('⚠️ Caché de líderes técnicos expirado, actualizando...');
-            localStorage.removeItem(storageKey);
-          }
-        }
 
         console.log('🌐 Consultando líderes técnicos desde el servidor...');
         const res = await fetch('/api/get_wf_technical_leader');
@@ -96,7 +57,6 @@ const RepositoryTable = () => {
         const data = await res.json();
 
         setTechnicalLeaders(data);
-        localStorage.setItem(storageKey, JSON.stringify({ timestamp: Date.now(), data }));
       } catch (err) {
         setTlError(err.message);
       } finally {
@@ -175,7 +135,7 @@ const RepositoryTable = () => {
                         <a href={`/dashboard/repository/${row.id}`} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">{row.name}</a>
                       ) : col.key === 'type_repository' ? (
                         <span className="px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300">
-                          {row.type_repository || 'N/A'}
+                          {row.id_type_repository.name || 'N/A'}
                         </span>
                       ) : col.key === 'id_technical_leader' ? (
                         <select
@@ -245,4 +205,4 @@ const RepositoryTable = () => {
   );
 };
 
-export default RepositoryTable;
+export default RepositoryControlTable;
