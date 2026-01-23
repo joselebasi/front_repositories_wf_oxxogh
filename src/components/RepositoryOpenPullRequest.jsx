@@ -5,6 +5,7 @@ export default function RepositoryOpenPullRequest() {
     const [repositories, setRepositories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
+    const [sortColumn, setSortColumn] = useState('created_at'); // 'created_at' or 'name_repository'
     const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 10;
 
@@ -36,14 +37,22 @@ export default function RepositoryOpenPullRequest() {
         return matchesSearch;
     });
 
-    // Sort pull requests by creation date
+    // Sort pull requests
     const sortedPullRequests = [...filteredPullRequests].sort((a, b) => {
-        const dateA = new Date(a.created_at || 0);
-        const dateB = new Date(b.created_at || 0);
-        if (sortOrder === 'desc') {
-            return dateB - dateA;
+        let valA, valB;
+
+        if (sortColumn === 'created_at') {
+            valA = new Date(a.created_at || 0);
+            valB = new Date(b.created_at || 0);
+        } else {
+            valA = (a[sortColumn] || '').toLowerCase();
+            valB = (b[sortColumn] || '').toLowerCase();
         }
-        return dateA - dateB;
+
+        if (sortOrder === 'desc') {
+            return valA < valB ? 1 : -1;
+        }
+        return valA > valB ? 1 : -1;
     });
 
     // Pagination logic
@@ -52,8 +61,13 @@ export default function RepositoryOpenPullRequest() {
     const endIndex = startIndex + itemsPerPage;
     const currentPullRequests = sortedPullRequests.slice(startIndex, endIndex);
 
-    const toggleSortOrder = () => {
-        setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
+    const handleSort = (column) => {
+        if (sortColumn === column) {
+            setSortOrder(sortOrder === 'desc' ? 'asc' : 'desc');
+        } else {
+            setSortColumn(column);
+            setSortOrder('asc');
+        }
     };
 
     const goToPage = (page) => {
@@ -144,8 +158,16 @@ export default function RepositoryOpenPullRequest() {
                 <table className="w-full border-collapse bg-white dark:bg-[#303030]">
                     <thead>
                         <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
-                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">
-                                Repositorio
+                            <th
+                                className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider cursor-pointer hover:bg-black/10 transition-colors duration-200 select-none"
+                                onClick={() => handleSort('name_repository')}
+                            >
+                                <div className="flex items-center gap-2">
+                                    Repositorio
+                                    <span className="text-lg">
+                                        {sortColumn === 'name_repository' ? (sortOrder === 'desc' ? '↓' : '↑') : '↕'}
+                                    </span>
+                                </div>
                             </th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider w-[30%]">
                                 Titulo
@@ -158,12 +180,12 @@ export default function RepositoryOpenPullRequest() {
                             </th>
                             <th
                                 className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider cursor-pointer hover:bg-black/10 transition-colors duration-200 select-none"
-                                onClick={toggleSortOrder}
+                                onClick={() => handleSort('created_at')}
                             >
                                 <div className="flex items-center gap-2">
                                     Fecha Creación
                                     <span className="text-lg">
-                                        {sortOrder === 'desc' ? '↓' : '↑'}
+                                        {sortColumn === 'created_at' ? (sortOrder === 'desc' ? '↓' : '↑') : '↕'}
                                     </span>
                                 </div>
                             </th>
