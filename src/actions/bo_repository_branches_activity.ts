@@ -22,9 +22,9 @@ export type BoRepositoryActivityData = {
 export const bo_repositories_activity_data = {
   getAllBoRepositoriesActivityData: defineAction({
     handler: async () => {
-      console.log('Fetching all repositories data from wf_repositories_data table');
+      console.log('Fetching all repositories data from bo_repository_branches_activity table');
       const { data, error } = await supabase
-        .from('bo_repositories_activity')
+        .from('bo_repository_branches_activity')
         .select(`
           *,
           id_type_repository (
@@ -34,7 +34,7 @@ export const bo_repositories_activity_data = {
           )
         `);
       if (error) {
-        console.error('Error fetching repositories data:', error.message);
+        console.error('Error fetching repository branches activity data:', error.message);
         return [] as BoRepositoryActivityData[];
       }
       return data as BoRepositoryActivityData[];

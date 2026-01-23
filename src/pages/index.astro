@@ -254,7 +254,7 @@ const { orgRole } = Astro.locals.auth();
 								</div>
 							</a>
 							<a
-								href="/dashboard/bo-repositories-activity"
+								href="/dashboard/bo-repository-branches-activity"
 								class="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 border border-gray-200 hover:border-[#fec630] focus:outline-none focus:ring-4 focus:ring-[#fec630] focus:ring-opacity-50 transform hover:-translate-y-1"
 								aria-label="Ir a Actividad en repositorios"
 							>
@@ -281,8 +281,8 @@ const { orgRole } = Astro.locals.auth();
 												Actividad en repositorios
 											</h3>
 											<p class="text-gray-600 mt-1">
-												Mostrar ramas y ultimo commit
-												por repositorio
+												Mostrar ramas, ultimo commit y
+												pr's abiertos por repositorio
 											</p>
 										</div>
 									</div>
@@ -320,7 +320,7 @@ const { orgRole } = Astro.locals.auth();
 						>
 							<!-- Menu Card -->
 							<a
-								href="/dashboard/bo-repositories-activity"
+								href="/dashboard/bo-repository-branches-activity"
 								class="group relative bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6 border border-gray-200 hover:border-[#fec630] focus:outline-none focus:ring-4 focus:ring-[#fec630] focus:ring-opacity-50 transform hover:-translate-y-1"
 								aria-label="Ir al menú principal"
 							>
