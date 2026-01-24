@@ -197,6 +197,101 @@ const activities_onpremise = [
     }
 ];
 
+// Datos para Cloud (Azure / App Services)
+const rollbackActivities = [
+    {
+        no: 1,
+        activity: "Creacion del PR de staging a main.",
+        responsible: "Líder Técnico (LT)",
+        requestedBy: "",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 2,
+        activity: "Validar que el repositorio donde se hara la liberacion productiva esten correctamente configurados con tags en GitHub",
+        responsible: "SCM Habilitador",
+        requestedBy: "",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 2,
+        activity: "Tener la version ubicada la ultima version estable en main",
+        responsible: "SCM Habilitador",
+        requestedBy: "",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 3,
+        activity: "Antes de hacer el marge del PR de staging a main, crear un rama apartir de la ultimo tag estable como main-rollback.",
+        responsible: "SCM Habilitador",
+        requestedBy: "",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 4,
+        activity: "Con la rama main-rollback creada hacer el merge a la rama main, esperar la instalacion de la version y la validacion es correcta podemos eliminar la rama main-rollback.",
+        responsible: "SCM Automatizador",
+        requestedBy: "",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 4,
+        activity: "Si hay error, se tendra un action de contruccion que ejecutaremos en la rama main-rollback para la creacion del nuevo paquete y se generara un CHO de rollback (si aplica).",
+        responsible: "SCM Automatizador",
+        requestedBy: "",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 5,
+        activity: "Si hay un error en la version que se instalo, dependiendo del tiempo que tarde sus correcciones podemos crear una hotfix apartir del nuevo main",
+        responsible: "SCM Automatizador",
+        requestedBy: "",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 6,
+        activity: "Creación credenciales programáticas del ACR para registro de contenedores (server, usuario, contraseña y repositorio) (Una tarea para ambientes no productivos y otra tarea para ambientes productivos.)",
+        responsible: "Equipo cloud",
+        requestedBy: "",
+        estimatedTime: ""
+    },
+    {
+        no: 7,
+        activity: "Creación de ticket para bóveda en Conjur (Una tarea por ambiente.)",
+        responsible: "Coordinador de Seguridad",
+        requestedBy: "",
+        estimatedTime: ""
+    },
+    {
+        no: 8,
+        activity: "Creación de ticket para secretos en Conjur (Una tarea por ambiente.)",
+        responsible: "Coordinador de Seguridad",
+        requestedBy: "",
+        estimatedTime: ""
+    },
+    {
+        no: 9,
+        activity: "Configuración de pipelines para recuperar los secretos de Conjur. - Solicitar archivo de configuración que almacena los secretos (Una tarea por ambiente.)",
+        responsible: "SCM Automatizador",
+        requestedBy: "",
+        estimatedTime: ""
+    },
+    {
+        no: 10,
+        activity: "Solicitar permisos para acceder a los ambientes en donde se necesita desplegar",
+        responsible: "SCM Coordinador",
+        requestedBy: "Equipo cloud",
+        estimatedTime: ""
+    },
+    {
+        no: 11,
+        activity: "Realizar los actions para CI-CD del aplicativo",
+        responsible: "",
+        requestedBy: "",
+        estimatedTime: ""
+    }
+];
+
 
 
 export default function AutomationGuidelines() {
