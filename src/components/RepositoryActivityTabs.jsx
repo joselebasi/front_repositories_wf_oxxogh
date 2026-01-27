@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import RepositoryBranchesLastCommit from './RepositoryBranchesLastCommit';
 import RepositoryOpenPullRequest from './RepositoryOpenPullRequest';
+import RepositoryThresholdLastUpdate from './RepositoryThresholdLastUpdate';
 
 export default function RepositoryActivityTabs() {
     const [activeTab, setActiveTab] = useState('branches'); // 'branches' or 'prs'
@@ -34,6 +35,18 @@ export default function RepositoryActivityTabs() {
                         </svg>
                         Pull Requests Abiertos
                     </button>
+                    <button
+                        onClick={() => setActiveTab('thresholds')}
+                        className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'thresholds'
+                            ? 'bg-white dark:bg-[#303030] text-amber-600 dark:text-amber-400 shadow-md transform scale-105'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-white/50 dark:hover:bg-white/5'
+                            }`}
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                        Threshold repositorios
+                    </button>
                 </div>
             </div>
 
@@ -41,8 +54,10 @@ export default function RepositoryActivityTabs() {
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
                 {activeTab === 'branches' ? (
                     <RepositoryBranchesLastCommit />
-                ) : (
+                ) : activeTab === 'prs' ? (
                     <RepositoryOpenPullRequest />
+                ) : (
+                    <RepositoryThresholdLastUpdate />
                 )}
             </div>
         </div>
