@@ -133,18 +133,18 @@ export default function RepositoryThresholdLastUpdate() {
                     <thead>
                         <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
                             <th className="px-4 py-4 text-left text-xs font-bold uppercase tracking-wider">Repositorio</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">C-Low</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">C-Med</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">C-High</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">C-Crit</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">S-Low</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">S-Med</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">S-High</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">S-Crit</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SC-Low</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SC-Med</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SC-High</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SC-Crit</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">CONT-Low</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">CONT-Med</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">CONT-High</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">CONT-Crit</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SAST-Low</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SAST-Med</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SAST-High</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SAST-Crit</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SCA-Low</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SCA-Med</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SCA-High</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">SCA-Crit</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
