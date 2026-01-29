@@ -125,10 +125,10 @@ export default function RepositoryWorkflowsActivity() {
 
     const charts = [
         { title: 'Checkmarx', field: 'have_checkmarx' },
-        { title: 'Builder', field: 'have_continuous_build' },
+        { title: 'Continuous Build', field: 'have_continuous_build' },
         { title: 'Conjur', field: 'have_conjur' },
         { title: 'Change Velocity', field: 'have_change_velocity' },
-        { title: 'Sharepoint Release', field: 'have_release_sharedpoint' },
+        { title: 'Sharepoint Release', field: 'have_release_sharepoint' },
         { title: 'GitHub Release', field: 'have_release_github' },
         { title: 'Validate PR', field: 'have_validate_pr' },
         { title: 'Cloud', field: 'is_cloud' }
@@ -235,7 +235,7 @@ export default function RepositoryWorkflowsActivity() {
                             <th className="px-4 py-4 text-left text-xs font-bold uppercase tracking-wider">Repositorio</th>
                             <th className="px-4 py-4 text-center text-xs font-bold uppercase tracking-wider">Tipo</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Checkmarx</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Builder</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Continuous<br />Build</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Conjur</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Change<br />Velocity</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Sharepoint<br />release</th>
