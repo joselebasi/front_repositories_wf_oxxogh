@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RepositoryBranchesLastCommit from './RepositoryBranchesLastCommit';
 import RepositoryOpenPullRequest from './RepositoryOpenPullRequest';
 import RepositoryThresholdLastUpdate from './RepositoryThresholdLastUpdate';
+import RepositoryWorkflowsActivity from './RepositoryWorkflowsActivity';
 
 export default function RepositoryActivityTabs() {
     const [activeTab, setActiveTab] = useState('branches'); // 'branches' or 'prs'
@@ -47,6 +48,18 @@ export default function RepositoryActivityTabs() {
                         </svg>
                         Threshold repositorios
                     </button>
+                    <button
+                        onClick={() => setActiveTab('workflows')}
+                        className={`flex items-center gap-2 px-6 py-2.5 text-sm font-bold rounded-lg transition-all duration-300 ${activeTab === 'workflows'
+                            ? 'bg-white dark:bg-[#303030] text-amber-600 dark:text-amber-400 shadow-md transform scale-105'
+                            : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-white/50 dark:hover:bg-white/5'
+                            }`}
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                        </svg>
+                        Workflow repositorios
+                    </button>
                 </div>
             </div>
 
@@ -56,8 +69,10 @@ export default function RepositoryActivityTabs() {
                     <RepositoryBranchesLastCommit />
                 ) : activeTab === 'prs' ? (
                     <RepositoryOpenPullRequest />
-                ) : (
+                ) : activeTab === 'thresholds' ? (
                     <RepositoryThresholdLastUpdate />
+                ) : (
+                    <RepositoryWorkflowsActivity />
                 )}
             </div>
         </div>
