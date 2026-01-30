@@ -62,7 +62,7 @@ export default function RepositoryActivityTabs() {
                                 </g>
                             </g>
                         </svg>
-                        Threshold repositorios
+                        Threshold Repositorios
                     </button>
                     <button
                         onClick={() => setActiveTab('workflows')}
