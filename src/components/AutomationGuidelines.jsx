@@ -85,7 +85,7 @@ const activities_cloud = [
 const activities_onpremise = [
     {
         no: 1,
-        activity: "Las tareas 2, 3 y 4 solo aplican para repositorios migrados de SVN. Si es un repositorio nuevo, iniciar en la tarea 5.",
+        activity: "Las tareas 2, 3 y 4 solo aplican para repositorios migrados de SVN. Si es un repositorio nuevo, inicie en la tarea 5.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
@@ -127,21 +127,21 @@ const activities_onpremise = [
     },
     {
         no: 7,
-        activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada, por ejemplo, MSBuild con .NET o Maven con Java, incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias. dejar toda la infromacion en el readme del repositorio.",
+        activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada (por ejemplo, MSBuild con .NET o Maven con Java), incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias. Dejar toda la información en el archivo README del repositorio.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
         no: 8,
-        activity: "Seguir las buenas practicas de versionamiento en github como el .gitignore para que solo el codigo fuente este en el repositorio, por ejemplo no debe haber archivos binarios, datos sensibles en claro, etc.",
+        activity: "Seguir las buenas prácticas de versionamiento en GitHub (como el uso de .gitignore) para que solo el código fuente esté en el repositorio. Por ejemplo: no debe haber archivos binarios, datos sensibles en texto plano, etc.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
     },
     {
         no: 9,
-        activity: "La deuda tecnica y las malas practicas no reportadas en el readme del repositorio son responsabilidad del dev team.",
+        activity: "La deuda técnica y las malas prácticas no reportadas en el archivo README del repositorio son responsabilidad del equipo de desarrollo (Dev Team).",
         responsible: "Líder Técnico (LT)",
         requestedBy: "Dev team",
         estimatedTime: "1 hr."
@@ -190,7 +190,11 @@ const activities_onpremise = [
     },
     {
         no: 16,
-        activity: "Compartir la ruta de SharePoint en el sitio ImplementaciónDEVSECOPS para la validación por QA (con proyecto activo). Si no se cuenta con QA, lo validará el LT. Compartir el artefacto generado en la tarea de Azure. Nota: el artefacto que se comparta en SharePoint no debe ser modificado; debe incluir tanto los secretos como las variables necesarias para su funcionamiento, y solo se manejará un SharePoint para todos los aplicativos de WF.",
+        activity: "SCM Automatizador compartirá la ruta de SharePoint en el sitio ImplementaciónDEVSECOPS " +
+            "para la validación por QA (con proyecto activo). Si no se cuenta con QA, " +
+            "lo validará el LT. SCM Automatizador compartirá el artefacto generado en la tarea de Azure. " +
+            "Nota: el artefacto que se comparta en SharePoint no debe ser modificado y " +
+            "solo se manejará un sitio de SharePoint para todos los aplicativos de WF.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
