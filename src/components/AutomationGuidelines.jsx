@@ -134,62 +134,69 @@ const activities_onpremise = [
     },
     {
         no: 8,
-        activity: "Hacer las recomenciones de buenas practicas de github como el .gitignore para solo el codigo fuente debe estar en el repositorio, por ejemplo no debe haber archivos binarios, secretos, etc.",
+        activity: "Seguir las buenas practicas de versionamiento en github como el .gitignore para que solo el codigo fuente este en el repositorio, por ejemplo no debe haber archivos binarios, datos sensibles en claro, etc.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
     },
     {
         no: 9,
+        activity: "El dev team dejara un readme en el repositorio con la informacion de como se debe compilar y construir la aplicacion con el CLI de la tecnologia utilizada asi como en el IDE, asi como las variables que cambian por ambiente.",
+        responsible: "Líder Técnico (LT)",
+        requestedBy: "Dev team",
+        estimatedTime: "1 hr."
+    },
+    {
+        no: 10,
         activity: "Proporcionar en la tarea de Azure la forma en que se manejan los secretos y qué variables cambian por ambiente, utilizando variables de GitHub.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
-        no: 10,
+        no: 11,
         activity: "Las siguientes tres actividades dependen de que la iniciativa tenga asignado el rol de Coordinador de Seguridad; de lo contrario, se utilizarán GitHub Secrets.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
     },
     {
-        no: 11,
+        no: 12,
         activity: "Crear GitHub Actions para la compilación y construcción (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "10 hrs."
     },
     {
-        no: 12,
+        no: 13,
         activity: "Creación de un ticket para la bóveda en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
-        no: 13,
+        no: 14,
         activity: "Creación de un ticket para la gestión de secretos en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
-        no: 14,
+        no: 15,
         activity: "Configuración de pipelines para la recuperación de secretos desde Conjur. Solicitar el archivo de configuración que almacena los secretos (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "8 hrs."
     },
     {
-        no: 15,
+        no: 16,
         activity: "Compartir la ruta de SharePoint en el sitio ImplementaciónDEVSECOPS para la validación por QA (con proyecto activo). Si no se cuenta con QA, lo validará el LT. Compartir el artefacto generado en la tarea de Azure. Nota: el artefacto que se comparta en SharePoint no debe ser modificado; debe incluir tanto los secretos como las variables necesarias para su funcionamiento, y solo se manejará un SharePoint para todos los aplicativos de WF.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
-        no: 16,
+        no: 17,
         activity: "Sesión de entrega del GitHub Action y explicación de los releases y pre-releases de GitHub que se generan, así como del versionamiento semántico manejado en GitHub y en los artefactos de SharePoint.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
