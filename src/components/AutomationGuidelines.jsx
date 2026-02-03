@@ -127,7 +127,7 @@ const activities_onpremise = [
     },
     {
         no: 7,
-        activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada, por ejemplo, MSBuild con .NET o Maven con Java, incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias.",
+        activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada, por ejemplo, MSBuild con .NET o Maven con Java, incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias. dejar toda la infromacion en el readme del repositorio.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
@@ -141,7 +141,7 @@ const activities_onpremise = [
     },
     {
         no: 9,
-        activity: "El dev team dejara un readme en el repositorio con la informacion de como se debe compilar y construir la aplicacion con el CLI de la tecnologia utilizada asi como en el IDE, asi como las variables que cambian por ambiente.",
+        activity: "La deuda tecnica y las malas practicas no reportadas en el readme del repositorio son responsabilidad del dev team.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "Dev team",
         estimatedTime: "1 hr."
