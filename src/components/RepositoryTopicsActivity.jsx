@@ -51,6 +51,7 @@ export default function RepositoryTopicsActivity() {
     const [repositories, setRepositories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [typeFilter, setTypeFilter] = useState('All');
+    const [statusFilter, setStatusFilter] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 10;
 
@@ -71,13 +72,17 @@ export default function RepositoryTopicsActivity() {
     // List of unique repository types for filter
     const repoTypes = ['All', ...new Set(repositories.map(r => r.id_type_repository?.name).filter(Boolean))];
 
-    // Filter repositories by type AND search term
+    // List of unique repository statuses for filter
+    const statusTypes = ['All', ...new Set(repositories.map(r => r.status).filter(Boolean))];
+
+    // Filter repositories by type AND status AND search term
     const filteredRepositories = repositories.filter(repo => {
         const matchesType = typeFilter === 'All' || repo.id_type_repository?.name === typeFilter;
+        const matchesStatus = statusFilter === 'All' || repo.status === statusFilter;
         const matchesSearch =
             (repo.name_repository?.toLowerCase() || repo.url_repository?.toLowerCase() || '').includes(searchTerm.toLowerCase());
 
-        return matchesType && matchesSearch;
+        return matchesType && matchesStatus && matchesSearch;
     });
 
     // Pagination logic
@@ -197,6 +202,26 @@ export default function RepositoryTopicsActivity() {
                         >
                             {repoTypes.map(type => (
                                 <option key={type} value={type}>{type}</option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Status Filter Dropdown */}
+                    <div className="flex items-center gap-2 w-full md:w-auto">
+                        <label htmlFor="statusFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                            Estatus:
+                        </label>
+                        <select
+                            id="statusFilter"
+                            value={statusFilter}
+                            onChange={(e) => {
+                                setStatusFilter(e.target.value);
+                                setCurrentPage(1);
+                            }}
+                            className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-48"
+                        >
+                            {statusTypes.map(status => (
+                                <option key={status} value={status}>{status}</option>
                             ))}
                         </select>
                     </div>
