@@ -220,35 +220,35 @@ export default function RepositoryTopicsActivity() {
                 <table className="w-full border-collapse bg-white dark:bg-[#303030]">
                     <thead>
                         <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
-                            <th className="px-4 py-4 text-left text-xs font-bold uppercase tracking-wider">Repositorio</th>
-                            <th className="px-4 py-4 text-center text-xs font-bold uppercase tracking-wider">Tipo</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Status</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Tech</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Toolbuild</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Framework</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Version</th>
-                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Release</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Repositorio</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Tipo</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Status</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Tech</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Toolbuild</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Framework</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Version</th>
+                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Release</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                         {currentRepositories.map((repo) => (
                             <tr key={repo.id} className="hover:bg-gradient-to-r hover:from-yellow-50 hover:to-amber-50 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all duration-200">
-                                <td className="px-4 py-4 text-sm font-bold whitespace-nowrap">
+                                <td className="px-6 py-4 text-sm font-bold whitespace-nowrap">
                                     <a href={repo.url_repository} target="_blank" rel="noopener noreferrer" className="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 hover:underline transition-colors duration-200">
                                         {repo.name_repository || repo.url_repository?.split('/').pop() || 'N/A'}
                                     </a>
                                 </td>
-                                <td className="px-4 py-4 text-center">
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">
                                     <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide shadow-sm" style={getBadgeStyle(repo.id_type_repository?.name)}>
                                         {repo.id_type_repository?.name || 'N/A'}
                                     </span>
                                 </td>
-                                <td className="px-2 py-4 text-center">{repo.status}</td>
-                                <td className="px-2 py-4 text-center">{repo.tech}</td>
-                                <td className="px-2 py-4 text-center">{repo.toolbuild}</td>
-                                <td className="px-2 py-4 text-center">{repo.framework}</td>
-                                <td className="px-2 py-4 text-center">{repo.version}</td>
-                                <td className="px-2 py-4 text-center">{repo.release}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.status}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.tech}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.toolbuild}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.framework}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.version}</td>
+                                <td className="px-6 py-4 text-sm text-gray-600 dark:text-gray-300">{repo.release}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -258,22 +258,24 @@ export default function RepositoryTopicsActivity() {
             {/* Pagination Controls */}
             <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-[#303030] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
-                    Mostrando <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> de <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, filteredRepositories.length)}</span> de <span className="font-semibold text-amber-600 dark:text-amber-400">{filteredRepositories.length}</span> repositorios
+                    Mostrando <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> de{' '}
+                    <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, filteredRepositories.length)}</span> de{' '}
+                    <span className="font-semibold text-amber-600 dark:text-amber-400">{filteredRepositories.length}</span> repositorios
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <button onClick={() => goToPage(1)} disabled={currentPage === 1} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all">Primero</button>
-                    <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all">Anterior</button>
+                    <button onClick={() => goToPage(1)} disabled={currentPage === 1} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md">Primero</button>
+                    <button onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md">Anterior</button>
                     <div className="flex items-center gap-1">
                         {[...Array(Math.min(5, totalPages))].map((_, idx) => {
                             let pageNum = totalPages <= 5 ? idx + 1 : (currentPage <= 3 ? idx + 1 : (currentPage >= totalPages - 2 ? totalPages - 4 + idx : currentPage - 2 + idx));
                             return (
-                                <button key={pageNum} onClick={() => goToPage(pageNum)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${currentPage === pageNum ? 'text-gray-900 shadow-lg font-bold' : 'bg-white text-black border border-gray-300 hover:bg-gray-50'}`} style={currentPage === pageNum ? { background: 'linear-gradient(to right, #ffc627, #ffb627)' } : {}}>{pageNum}</button>
+                                <button key={pageNum} onClick={() => goToPage(pageNum)} className={`px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md ${currentPage === pageNum ? 'text-gray-900 shadow-lg font-bold' : 'bg-white text-black border border-gray-300 hover:bg-gray-50'}`} style={currentPage === pageNum ? { background: 'linear-gradient(to right, #ffc627, #ffb627)' } : {}}>{pageNum}</button>
                             );
                         })}
                     </div>
-                    <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all">Siguiente</button>
-                    <button onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all">Último</button>
+                    <button onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md">Siguiente</button>
+                    <button onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} className="px-4 py-2 text-sm font-medium text-black bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 disabled:cursor-not-allowed transition-all duration-200 shadow-sm hover:shadow-md">Último</button>
                 </div>
             </div>
 
