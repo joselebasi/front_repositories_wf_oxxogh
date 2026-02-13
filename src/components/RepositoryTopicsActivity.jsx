@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react';
 import { actions } from 'astro:actions';
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 
+const STATUS_GLOSSARY = [
+    { status: 'decouple', description: 'necesita desacoplo' },
+    { status: 'automation-phase1', description: 'falta mandar el paquete a sharepoint' },
+    { status: 'automation-phase2', description: 'repos tentativos para 2026' },
+    { status: 'automation-phase3', description: 'repos de base de datos y shell a futuro' },
+    { status: 'analysis', description: 'repos a analizar si se mueven o eliminan' }
+];
+
 const StatusChart = ({ title, data, colors }) => (
     <div className="bg-white dark:bg-[#404040] p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 flex flex-col items-center w-full max-w-2xl mx-auto">
         <h3 className="text-sm font-bold text-gray-700 dark:text-gray-300 mb-4 uppercase tracking-tight">{title}</h3>
@@ -311,6 +319,30 @@ export default function RepositoryTopicsActivity() {
                     data={calculateStatusDistribution()}
                     colors={STATUS_COLORS}
                 />
+            </div>
+
+            {/* Glossary Section */}
+            <div className="overflow-hidden rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mt-6 bg-white dark:bg-[#303030] max-w-xl mx-auto">
+                <table className="w-full border-collapse">
+                    <thead>
+                        <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
+                            <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Estatus</th>
+                            <th className="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider">Descripción</th>
+                        </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                        {STATUS_GLOSSARY.map((item, idx) => (
+                            <tr key={idx} className="hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-150">
+                                <td className="px-6 py-3 text-sm font-bold text-amber-600 dark:text-amber-400 whitespace-nowrap tracking-tighter">
+                                    {item.status}
+                                </td>
+                                <td className="px-6 py-3 text-sm text-gray-600 dark:text-gray-300 italic">
+                                    {item.description}
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </div>
     );
