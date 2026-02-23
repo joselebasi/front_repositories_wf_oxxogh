@@ -120,76 +120,83 @@ const activities_onpremise = [
     },
     {
         no: 6,
-        activity: "Presentar el diagrama de arquitectura del flujo actual de despliegue hacia servidores on-premise (una sola tarea para todos los ambientes).",
+        activity: "Presentar el diagrama de arquitectura que muestre los sistemas con los que la aplicación tiene conexión, como bases de datos, servicios web, entre otros (una sola tarea para todos los ambientes).",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
         no: 7,
+        activity: "Presentar el diagrama o describir de manera verbal el flujo actual de despliegue hacia los servidores on-premise, indicando la ruta en SharePoint y la estructura de carpetas y archivos que se comparten con el equipo L3 para la instalación. (una sola tarea para todos los ambientes).",
+        responsible: "Líder Técnico (LT)",
+        requestedBy: "SCM Automatizador",
+        estimatedTime: "30 min."
+    },
+    {
+        no: 8,
         activity: "Proporcionar detalles técnicos de compilación y construcción mediante el CLI de la tecnología utilizada (por ejemplo, MSBuild con .NET o Maven con Java), incluyendo comandos, dependencias, tipo de artefacto generado (EAR, WAR, DLL, ejecutables) y configuraciones necesarias. Dejar toda la información en el archivo README del repositorio.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "1 hr."
     },
     {
-        no: 8,
+        no: 9,
         activity: "Seguir las buenas prácticas de versionamiento en GitHub (como el uso de .gitignore) para que solo el código fuente esté en el repositorio. Por ejemplo: no debe haber archivos binarios, datos sensibles en texto plano, etc.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
     },
     {
-        no: 9,
-        activity: "La deuda técnica y las malas prácticas no reportadas en el archivo README del repositorio son responsabilidad del equipo de desarrollo (Dev Team).",
+        no: 10,
+        activity: "Documentar la deuda técnica y las malas prácticas en el archivo README del repositorio, a fin de atender su corrección en un momento posterior.",
         responsible: "Líder Técnico (LT)",
         requestedBy: "Dev team",
         estimatedTime: "1 hr."
     },
     {
-        no: 10,
-        activity: "Proporcionar en la tarea de Azure la forma en que se manejan los secretos y qué variables cambian por ambiente, utilizando variables de GitHub.",
+        no: 11,
+        activity: "Proporcionar la información de los servicios utilizados por ambiente, como host, usuario y contraseña de base de datos, así como las URL de los servicios web, entre otros",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "30 min."
     },
     {
-        no: 11,
+        no: 12,
         activity: "Las siguientes tres actividades dependen de que la iniciativa tenga asignado el rol de Coordinador de Seguridad; de lo contrario, se utilizarán GitHub Secrets.",
         responsible: "",
         requestedBy: "",
         estimatedTime: ""
     },
     {
-        no: 12,
+        no: 13,
         activity: "Crear GitHub Actions para la compilación y construcción (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "",
         estimatedTime: "10 hrs."
     },
     {
-        no: 13,
+        no: 14,
         activity: "Creación de un ticket para la bóveda en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
-        no: 14,
+        no: 15,
         activity: "Creación de un ticket para la gestión de secretos en Conjur (una tarea por ambiente).",
         responsible: "Accenture",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "SLA Accenture"
     },
     {
-        no: 15,
+        no: 16,
         activity: "Configuración de pipelines para la recuperación de secretos desde Conjur. Solicitar el archivo de configuración que almacena los secretos (una tarea por ambiente).",
         responsible: "SCM Automatizador",
         requestedBy: "Coordinador de Seguridad",
         estimatedTime: "8 hrs."
     },
     {
-        no: 16,
+        no: 17,
         activity: "SCM Automatizador compartirá la ruta de SharePoint en el sitio ImplementaciónDEVSECOPS " +
             "para la validación por QA (con proyecto activo). Si no se cuenta con QA, " +
             "lo validará el LT. SCM Automatizador compartirá el artefacto generado en la tarea de Azure. " +
@@ -200,11 +207,18 @@ const activities_onpremise = [
         estimatedTime: "1 hr."
     },
     {
-        no: 17,
+        no: 18,
         activity: "Sesión de entrega del GitHub Action y explicación de los releases y pre-releases de GitHub que se generan, así como del versionamiento semántico manejado en GitHub y en los artefactos de SharePoint.",
         responsible: "SCM Automatizador",
         requestedBy: "Líder Técnico (LT)",
         estimatedTime: "1 hr."
+    },
+    {
+        no: 19,
+        activity: "Se solicitará el workflow de Change Velocity en caso de aplicar (una tarea por ambiente).",
+        responsible: "SCM Automatizador",
+        requestedBy: "Líder Técnico (LT)",
+        estimatedTime: "8 hr."
     }
 ];
 
