@@ -120,14 +120,14 @@ const activities_onpremise = [
     },
     {
         no: 6,
-        activity: "Presentar el diagrama de arquitectura que muestre los sistemas con los que la aplicación tiene conexión, como bases de datos, servicios web, entre otros (una sola tarea para todos los ambientes).",
+        activity: "Presentar el diagrama funcional donde se muestre los sistemas con los que la aplicación tiene conexión, como bases de datos, servicios web, entre otros (una sola tarea para todos los ambientes).",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
     },
     {
         no: 7,
-        activity: "Presentar el diagrama o describir de manera verbal la interacción entre el LT (Líder Técnico y el equipo de Desarrollo) y el equipo L3, previa a la entrega del compilado o instaladores para su despliegue en ambientes controlados por soporte (instalaciones previas a los servidores productivos on-premise), indicando la ruta en SharePoint y la estructura de carpetas y archivos compartidos con el equipo L3 para la instalación (una sola tarea para todos los ambientes).",
+        activity: "Presentar el diagrama entrega instalacion donde se muestre la interacción entre el LT (Líder Técnico y el equipo de Desarrollo) y el equipo L3, previa a la entrega del compilado o instaladores para su despliegue en ambientes controlados por soporte (instalaciones previas a los servidores productivos on-premise), indicando la ruta en SharePoint y la estructura de carpetas y archivos compartidos con el equipo L3 para la instalación (una sola tarea para todos los ambientes).",
         responsible: "Líder Técnico (LT)",
         requestedBy: "SCM Automatizador",
         estimatedTime: "30 min."
