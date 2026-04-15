@@ -7,6 +7,7 @@ export default function RepositoryOpenPullRequest() {
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
     const [sortColumn, setSortColumn] = useState('created_at'); // 'created_at' or 'name_repository'
     const [searchTerm, setSearchTerm] = useState('');
+    const [lastUpdate, setLastUpdate] = useState(null);
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -20,7 +21,19 @@ export default function RepositoryOpenPullRequest() {
                 setRepositories(data);
             }
         };
+
+        const fetchLastUpdate = async () => {
+            const { data, error } = await actions.bo_table_last_update_data.getTableLastUpdateByTableName({ table_name: 'bo_open_pull_requests' });
+            if (error) {
+                console.error(error);
+                return;
+            }
+            if (data) {
+                setLastUpdate(data[0]?.last_update || null);
+            }
+        };
         fetchRepositories();
+        fetchLastUpdate();
     }, []);
 
     // List of reviewers for filter if needed, currently not used for filtering
@@ -138,6 +151,9 @@ export default function RepositoryOpenPullRequest() {
                             className="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg leading-5 bg-white dark:bg-[#404040] text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 sm:text-sm transition-all duration-200"
                         />
                     </div>
+                </div>
+                <div className="text-sm text-gray-600 dark:text-gray-300 font-semibold">
+                    Última actualización: {lastUpdate ? formatDate(lastUpdate) : 'Cargando...'}
                 </div>
 
                 <div className="flex items-center gap-4">

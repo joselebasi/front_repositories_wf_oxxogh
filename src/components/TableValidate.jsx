@@ -9,6 +9,7 @@ export default function TableValidate() {
     const [typeFilter, setTypeFilter] = useState('All');
     const [teamFilter, setTeamFilter] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
+    const [lastUpdate, setLastUpdate] = useState(null);
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -23,7 +24,18 @@ export default function TableValidate() {
                 setMembers(data);
             }
         };
+          const fetchLastUpdate = async () => {
+                    const { data, error } = await actions.bo_table_last_update_data.getTableLastUpdateByTableName({ table_name: 'bo_member_last_contribution' });
+                    if (error) {
+                        console.error(error);
+                        return;
+                    }
+                    if (data) {
+                        setLastUpdate(data[0]?.last_update || null);
+                    }
+                };
         fetchMembers();
+        fetchLastUpdate();
     }, []);
 
     // List of unique member types for filter
@@ -202,7 +214,9 @@ export default function TableValidate() {
                         </select>
                     </div>
                 </div>
-
+                <div className="text-sm text-gray-600 dark:text-gray-300 font-semibold">
+                    Última actualización: {lastUpdate ? formatDate(lastUpdate) : 'Cargando...'}
+                </div>
                 <div className="flex items-center gap-4">
                     <button
                         onClick={downloadCSV}
