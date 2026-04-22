@@ -8,6 +8,7 @@ export default function RepositoryActivity() {
     const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
     const [typeFilter, setTypeFilter] = useState('All');
     const [searchTerm, setSearchTerm] = useState('');
+    const [lastUpdate, setLastUpdate] = useState(null);
     const itemsPerPage = 10;
 
     useEffect(() => {
@@ -21,7 +22,18 @@ export default function RepositoryActivity() {
                 setRepositories(data);
             }
         };
+        const fetchLastUpdate = async () => {
+            const { data, error } = await actions.bo_table_last_update_data.getTableLastUpdateByTableName({ table_name: 'bo_repository_branches_activity' });
+            if (error) {
+                console.error(error);
+                return;
+            }
+            if (data) {
+                setLastUpdate(data[0]?.last_update || null);
+            }
+        };
         fetchRepositories();
+        fetchLastUpdate();
     }, []);
 
     // List of unique repository types for filter
@@ -168,6 +180,10 @@ export default function RepositoryActivity() {
                             ))}
                         </select>
                     </div>
+                </div>
+
+                <div className="text-sm text-gray-600 dark:text-gray-300 font-semibold">
+                    Última actualización: {lastUpdate ? formatDate(lastUpdate) : 'Cargando...'}
                 </div>
 
                 <div className="flex items-center gap-4">
