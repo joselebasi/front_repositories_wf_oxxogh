@@ -1,0 +1,27 @@
+---
+import DevSecOpsToolsTabs from "@/components/DevSecOpsToolsTabs.astro";
+import ConfigSonarqube from "@/components/ConfigSonarqube.astro";
+import Layout from "@/layouts/Layout.astro";
+// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
+// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const { userId, orgRole, orgSlug } = Astro.locals.auth();
+console.log("🔍 Auth Debug:", {
+    userId,
+    orgRole,
+    orgSlug,
+});
+
+const hasAccess = userId && orgSlug?.startsWith("scm-");
+
+if (!hasAccess) {
+    return Astro.redirect("/");
+}
+---
+
+<Layout title="Tools DevSecOps">
+    <div class="p-4">
+        <DevSecOpsToolsTabs>
+            <ConfigSonarqube slot="sonarqube" />
+        </DevSecOpsToolsTabs>
+    </div>
+</Layout>
