@@ -1,0 +1,181 @@
+---
+// ConfigSharepoint.astro
+---
+
+<div class="w-full rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-[#303030] shadow-sm overflow-hidden">
+
+    <!-- Header -->
+    <div class="flex items-center gap-3 px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-blue-50 dark:bg-blue-900/10">
+        <div class="shrink-0 w-9 h-9 flex items-center justify-center rounded-lg bg-blue-100 dark:bg-blue-900/40">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="text-blue-600 dark:text-blue-400">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+            </svg>
+        </div>
+        <div>
+            <h2 class="text-base font-bold text-gray-800 dark:text-gray-100">Configuración SharePoint</h2>
+            <p class="text-xs text-gray-500 dark:text-gray-400">Acceso al sitio principal para la entrega de paquetes</p>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="p-6">
+        <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs ring-2 ring-blue-200 dark:ring-blue-700">1</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">Sitio principal</p>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">El sharepoint principal para la entrega de paquetes de instalación a los L3 es sitio <span class="font-semibold">WFyWeb</span></p>
+                <a
+                    href="https://femcom.sharepoint.com/sites/WFyWeb/Documentos%20compartidos/Forms/AllItems.aspx"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    Acceder al sitio WFyWeb
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Aquí encontrarás los paquetes de instalación disponibles para los equipos L3</p>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-6 border-t border-gray-200 dark:border-gray-600"></div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs ring-2 ring-blue-200 dark:ring-blue-700">2</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">Paquetes desde GitHub Actions</p>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">Los paquetes que se construyen automáticamente desde GitHub Actions se encuentran en la carpeta raíz <span class="font-semibold">WF_Entregas_GitHub</span></p>
+
+                <!-- Breadcrumb Path -->
+                <div class="p-3 rounded-lg bg-gray-50 dark:bg-[#404040] border border-gray-200 dark:border-gray-600 mb-3">
+                    <p class="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-2">Estructura de carpetas - Ejemplo:</p>
+                    <div class="text-xs text-gray-700 dark:text-gray-200 space-y-1 font-mono">
+                        <div>Documentos</div>
+                        <div class="ml-3 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> WF_Entregas_GitHub
+                        </div>
+                        <div class="ml-6 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> 2025
+                        </div>
+                        <div class="ml-9 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> AppsDeploy
+                        </div>
+                        <div class="ml-12 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> JAVA
+                        </div>
+                        <div class="ml-15 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> WF_Portal_Devoluciones_V3
+                        </div>
+                        <div class="ml-18 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> CHG007288
+                        </div>
+                        <div class="ml-21 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold">
+                            <span class="text-gray-400">└─</span> PortalDevoluciones-3.0.13.war
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-500 dark:text-gray-400">Los archivos .war, .jar y otros artefactos están organizados por proyecto, versión y número de cambio (CHG)</p>
+
+                <!-- Important Note -->
+                <div class="mt-4 p-3 rounded-lg bg-orange-50 dark:bg-orange-900/10 border border-orange-200 dark:border-orange-700">
+                    <div class="flex gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-orange-600 dark:text-orange-400 shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                        <div class="text-xs text-orange-800 dark:text-orange-200">
+                            <p class="font-semibold mb-1">Gestión de carpetas</p>
+                            <p>Esta carpeta fue creada por <span class="font-semibold">German Tenorio</span> (<a href="mailto:german.tenorio@oxxo.com" class="text-orange-600 dark:text-orange-400 hover:underline">german.tenorio@oxxo.com</a>), quien confirmo que <span class="font-semibold">nadie puede crear ni modificar carpetas</span> en esta estructura, solamente la app que se usa en Github Actions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-6 border-t border-gray-200 dark:border-gray-600"></div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs ring-2 ring-blue-200 dark:ring-blue-700">3</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">Paquetes manuales</p>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">En esta ruta se crearán las carpetas restantes: <span class="font-semibold">BDObjects, Instalación, Rollback</span> y <span class="font-semibold">AppsDeploy</span> para aplicativos que no estén automatizados.</p>
+
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-3"><span class="font-semibold">Nota importante:</span> Si todos los aplicativos del proyecto ya están automatizados, solo deberás compartir la URL del artefacto. Esta URL debe extraerse del GitHub Action que se ejecuta automáticamente después del merge del Pull Request.</p>
+
+                <!-- Breadcrumb Path -->
+                <div class="p-3 rounded-lg bg-gray-50 dark:bg-[#404040] border border-gray-200 dark:border-gray-600 mb-3">
+                    <p class="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-2">Ruta para paquetes manuales:</p>
+                    <div class="text-xs text-gray-700 dark:text-gray-200 space-y-1 font-mono">
+                        <div>Documentos</div>
+                        <div class="ml-3 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> General
+                        </div>
+                        <div class="ml-6 flex items-center gap-2">
+                            <span class="text-gray-400">└─</span> CHOS_WF
+                        </div>
+                        <div class="ml-9 flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold">
+                            <span class="text-gray-400">└─</span> [nombre-del-repositorio]
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-xs text-gray-500 dark:text-gray-400">Crea una carpeta con el nombre de tu repositorio en CHOS_WF para vincularlo con GitHub y organizar tus paquetes manuales.</p>
+
+                <!-- Additional Note -->
+                <div class="mt-4 p-3 rounded-lg bg-green-50 dark:bg-green-900/10 border border-green-200 dark:border-green-700">
+                    <div class="flex gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-green-600 dark:text-green-400 shrink-0 mt-0.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 16 16 12 12 8"/>
+                            <polyline points="8 12 12 16 16 12"/>
+                        </svg>
+                        <div class="text-xs text-green-800 dark:text-green-200">
+                            <p class="font-semibold mb-1">Sitio alterno para paquetes manuales</p>
+                            <p>El LT <span class="font-semibold">Hermelindo</span> (<a href="mailto:hermelindo.delacruzd@oxxo.com" class="text-green-600 dark:text-green-400 hover:underline">hermelindo.delacruzd@oxxo.com</a>) nos menciona que existe un sitio alterno donde se generan los paquetes manuales. Puedes acceder aquí: <a href="https://femcom.sharepoint.com/sites/ti.comercio/NE/pweb/Aplicaciones/Forms/AllItems.aspx" target="_blank" rel="noopener noreferrer" class="text-green-600 dark:text-green-400 hover:underline">Aplicaciones - SharePoint</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="my-6 border-t border-gray-200 dark:border-gray-600"></div>
+
+        <!-- Step 4 -->
+        <div class="flex gap-4">
+            <div class="flex flex-col items-center">
+                <span class="shrink-0 w-7 h-7 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 font-bold text-xs ring-2 ring-blue-200 dark:ring-blue-700">4</span>
+            </div>
+            <div class="flex-1">
+                <p class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-2">Documentación del proyecto</p>
+                <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">Esta es la ruta del espacio en SharePoint que se genera al iniciar un folio de proyecto. Aquí debe concentrarse toda la documentación que se compartirá con el equipo de trabajo, como manuales, diagramas y documentación técnica.</p>
+
+                <a
+                    href="https://femcom.sharepoint.com/:f:/s/ImplementacinDEVSECOPS/IgBzNjXoOxh2SIVVtURMp10uAVKhG7O3VuafC0D4jDo3FX4?e=Rd7vrW"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 hover:underline transition-colors"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    Abrir espacio de documentación
+                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">Usa este espacio como repositorio central de documentos del proyecto desde el inicio del folio.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

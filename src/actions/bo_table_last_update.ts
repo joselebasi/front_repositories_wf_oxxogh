@@ -20,7 +20,9 @@ export const bo_table_last_update_data = {
       const { data, error } = await supabase
         .from('bo_table_last_update')
         .select('*')
-        .eq('table_name', input.table_name);
+        .eq('table_name', input.table_name)
+        .order('last_update', { ascending: false })
+        .limit(1);
       if (error) {
         console.error('Error fetching table last update data:', error.message);
         return [] as TableLastUpdate[];

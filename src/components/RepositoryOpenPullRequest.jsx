@@ -24,11 +24,13 @@ export default function RepositoryOpenPullRequest() {
 
         const fetchLastUpdate = async () => {
             const { data, error } = await actions.bo_table_last_update_data.getTableLastUpdateByTableName({ table_name: 'bo_open_pull_requests' });
+            console.log('Fetching last update for bo_open_pull_requests');
             if (error) {
                 console.error(error);
                 return;
             }
             if (data) {
+                console.log('Last update data:', data);
                 setLastUpdate(data[0]?.last_update || null);
             }
         };

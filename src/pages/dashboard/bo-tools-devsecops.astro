@@ -1,6 +1,10 @@
 ---
 import DevSecOpsToolsTabs from "@/components/DevSecOpsToolsTabs.astro";
 import ConfigSonarqube from "@/components/ConfigSonarqube.astro";
+import ConfigCheckmarx from "@/components/ConfigCheckmarx.astro";
+import ConfigConjur from "@/components/ConfigConjur.astro";
+import ConfigBytebase from "@/components/ConfigBytebase.astro";
+import ConfigSharepoint from "@/components/ConfigSharepoint.astro";
 import Layout from "@/layouts/Layout.astro";
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
@@ -21,7 +25,17 @@ if (!hasAccess) {
 <Layout title="Tools DevSecOps">
     <div class="p-4">
         <DevSecOpsToolsTabs>
+
             <ConfigSonarqube slot="sonarqube" />
+
+            <ConfigCheckmarx slot="checkmarx" />
+
+            <ConfigConjur slot="conjur" />
+
+            <ConfigBytebase slot="bytebase" />
+
+            <ConfigSharepoint slot="sharepoint" />
+
         </DevSecOpsToolsTabs>
     </div>
 </Layout>
