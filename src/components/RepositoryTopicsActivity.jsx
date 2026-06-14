@@ -59,7 +59,8 @@ export default function RepositoryTopicsActivity() {
     const [repositories, setRepositories] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [typeFilter, setTypeFilter] = useState('All');
-    const [statusFilter, setStatusFilter] = useState('All');
+    const [toolbuildFilter, setToolbuildFilter] = useState('All');
+    const [statusSort, setStatusSort] = useState('asc');
     const [searchTerm, setSearchTerm] = useState('');
     const itemsPerPage = 10;
 
@@ -80,24 +81,33 @@ export default function RepositoryTopicsActivity() {
     // List of unique repository types for filter
     const repoTypes = ['All', ...new Set(repositories.map(r => r.id_type_repository?.name).filter(Boolean))];
 
-    // List of unique repository statuses for filter
-    const statusTypes = ['All', ...new Set(repositories.map(r => r.status).filter(Boolean))];
+    // List of unique toolbuild values for filter
+    const toolbuildTypes = ['All', ...new Set(repositories.map(r => r.toolbuild).filter(Boolean))];
 
-    // Filter repositories by type AND status AND search term
+    // Filter repositories by type AND toolbuild AND search term
     const filteredRepositories = repositories.filter(repo => {
         const matchesType = typeFilter === 'All' || repo.id_type_repository?.name === typeFilter;
-        const matchesStatus = statusFilter === 'All' || repo.status === statusFilter;
+        const matchesToolbuild = toolbuildFilter === 'All' || repo.toolbuild === toolbuildFilter;
         const matchesSearch =
             (repo.name_repository?.toLowerCase() || repo.url_repository?.toLowerCase() || '').includes(searchTerm.toLowerCase());
 
-        return matchesType && matchesStatus && matchesSearch;
+        return matchesType && matchesToolbuild && matchesSearch;
+    });
+
+    const sortedRepositories = [...filteredRepositories].sort((a, b) => {
+        const aStatus = (a.status || '').toString().toLowerCase();
+        const bStatus = (b.status || '').toString().toLowerCase();
+
+        if (aStatus < bStatus) return statusSort === 'asc' ? -1 : 1;
+        if (aStatus > bStatus) return statusSort === 'asc' ? 1 : -1;
+        return 0;
     });
 
     // Pagination logic
-    const totalPages = Math.ceil(filteredRepositories.length / itemsPerPage);
+    const totalPages = Math.ceil(sortedRepositories.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
-    const currentRepositories = filteredRepositories.slice(startIndex, endIndex);
+    const currentRepositories = sortedRepositories.slice(startIndex, endIndex);
 
     const goToPage = (page) => {
         setCurrentPage(Math.max(1, Math.min(page, totalPages)));
@@ -214,22 +224,22 @@ export default function RepositoryTopicsActivity() {
                         </select>
                     </div>
 
-                    {/* Status Filter Dropdown */}
+                    {/* Toolbuild Filter Dropdown */}
                     <div className="flex items-center gap-2 w-full md:w-auto">
-                        <label htmlFor="statusFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                            Estatus:
+                        <label htmlFor="toolbuildFilter" className="text-sm font-semibold text-gray-700 dark:text-gray-300 whitespace-nowrap">
+                            Toolbuild:
                         </label>
                         <select
-                            id="statusFilter"
-                            value={statusFilter}
+                            id="toolbuildFilter"
+                            value={toolbuildFilter}
                             onChange={(e) => {
-                                setStatusFilter(e.target.value);
+                                setToolbuildFilter(e.target.value);
                                 setCurrentPage(1);
                             }}
                             className="bg-white dark:bg-[#404040] text-gray-900 dark:text-white text-sm rounded-lg border border-gray-300 dark:border-gray-600 focus:ring-amber-500 focus:border-amber-500 block p-2 transition-colors duration-200 outline-none w-full md:w-48"
                         >
-                            {statusTypes.map(status => (
-                                <option key={status} value={status}>{status}</option>
+                            {toolbuildTypes.map(toolbuild => (
+                                <option key={toolbuild} value={toolbuild}>{toolbuild}</option>
                             ))}
                         </select>
                     </div>
@@ -255,7 +265,15 @@ export default function RepositoryTopicsActivity() {
                         <tr className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-gray-900" style={{ background: 'linear-gradient(to right, #ffc627, #ffb627, #ffc627)' }}>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Repositorio</th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Tipo</th>
-                            <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Status</th>
+                            <th
+                                onClick={() => {
+                                    setStatusSort(prev => (prev === 'asc' ? 'desc' : 'asc'));
+                                    setCurrentPage(1);
+                                }}
+                                className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider cursor-pointer select-none"
+                            >
+                                Status {statusSort === 'asc' ? '▲' : '▼'}
+                            </th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Tech</th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Toolbuild</th>
                             <th className="px-6 py-4 text-left text-sm font-bold uppercase tracking-wider">Framework</th>
@@ -292,8 +310,8 @@ export default function RepositoryTopicsActivity() {
             <div className="flex items-center justify-between px-6 py-4 bg-white dark:bg-[#303030] rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
                 <div className="flex items-center gap-4 text-sm text-gray-600 dark:text-gray-300">
                     Mostrando <span className="font-semibold text-amber-600 dark:text-amber-400">{startIndex + 1}</span> de{' '}
-                    <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, filteredRepositories.length)}</span> de{' '}
-                    <span className="font-semibold text-amber-600 dark:text-amber-400">{filteredRepositories.length}</span> repositorios
+                    <span className="font-semibold text-amber-600 dark:text-amber-400">{Math.min(endIndex, sortedRepositories.length)}</span> de{' '}
+                    <span className="font-semibold text-amber-600 dark:text-amber-400">{sortedRepositories.length}</span> repositorios
                 </div>
 
                 <div className="flex items-center gap-2">
