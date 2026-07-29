@@ -148,7 +148,7 @@ export default function RepositoryWorkflowsActivity() {
                     repo.have_continuous_build ? 'SI' : 'NO',
                     repo.have_conjur ? 'SI' : 'NO',
                     repo.have_change_velocity ? 'SI' : 'NO',
-                    repo.have_release_sharedpoint ? 'SI' : 'NO',
+                    repo.have_release_sharepoint ? 'SI' : 'NO',
                     repo.have_release_github ? 'SI' : 'NO',
                     repo.have_validate_pr ? 'SI' : 'NO',
                     repo.is_cloud ? 'SI' : 'NO'
