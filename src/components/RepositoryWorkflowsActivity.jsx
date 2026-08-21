@@ -131,12 +131,13 @@ export default function RepositoryWorkflowsActivity() {
         { title: 'Sharepoint Release', field: 'have_release_sharepoint' },
         { title: 'GitHub Release', field: 'have_release_github' },
         { title: 'Validate PR', field: 'have_validate_pr' },
+        { title: 'Auto Close', field: 'have_auto_close' },
         { title: 'Cloud', field: 'is_cloud' }
     ];
 
     const downloadCSV = () => {
         const headers = [
-            'Repositorio', 'Tipo', 'Checkmarx', 'Continuous Build', 'Conjur', 'Change Velocity', 'SharePoint Rel', 'GitHub Rel', 'Validate PR', 'Cloud'
+            'Repositorio', 'Tipo', 'Checkmarx', 'Continuous Build', 'Conjur', 'Change Velocity', 'SharePoint Rel', 'GitHub Rel', 'Validate PR', 'Auto-Close', 'Cloud'
         ];
         const csvContent = [
             headers.join(','),
@@ -151,6 +152,7 @@ export default function RepositoryWorkflowsActivity() {
                     repo.have_release_sharepoint ? 'SI' : 'NO',
                     repo.have_release_github ? 'SI' : 'NO',
                     repo.have_validate_pr ? 'SI' : 'NO',
+                    repo.have_auto_close ? 'SI' : 'NO',
                     repo.is_cloud ? 'SI' : 'NO'
                 ].join(',');
             })
@@ -241,6 +243,7 @@ export default function RepositoryWorkflowsActivity() {
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Sharepoint<br />release</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Github<br />release</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Validate<br />PR</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Auto Close</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Cloud</th>
                         </tr>
                     </thead>
@@ -264,6 +267,7 @@ export default function RepositoryWorkflowsActivity() {
                                 <td className="px-2 py-4"><StatusIcon status={repo.have_release_sharepoint} /></td>
                                 <td className="px-2 py-4"><StatusIcon status={repo.have_release_github} /></td>
                                 <td className="px-2 py-4"><StatusIcon status={repo.have_validate_pr} /></td>
+                                <td className="px-2 py-4"><StatusIcon status={repo.have_auto_close} /></td>
                                 <td className="px-2 py-4"><StatusIcon status={repo.is_cloud} /></td>
                             </tr>
                         ))}
