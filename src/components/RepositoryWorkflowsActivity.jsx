@@ -131,12 +131,13 @@ export default function RepositoryWorkflowsActivity() {
         { title: 'Sharepoint Release', field: 'have_release_sharepoint' },
         { title: 'GitHub Release', field: 'have_release_github' },
         { title: 'Validate PR', field: 'have_validate_pr' },
-        { title: 'Cloud', field: 'is_cloud' }
+        { title: 'Cloud', field: 'is_cloud' },
+        { title: 'Sonar', field: 'have_sonar' }
     ];
 
     const downloadCSV = () => {
         const headers = [
-            'Repositorio', 'Tipo', 'Checkmarx', 'Continuous Build', 'Conjur', 'Change Velocity', 'SharePoint Rel', 'GitHub Rel', 'Validate PR', 'Cloud'
+            'Repositorio', 'Tipo', 'Checkmarx', 'Continuous Build', 'Conjur', 'Change Velocity', 'SharePoint Rel', 'GitHub Rel', 'Validate PR', 'Cloud', 'Sonar'
         ];
         const csvContent = [
             headers.join(','),
@@ -151,7 +152,8 @@ export default function RepositoryWorkflowsActivity() {
                     repo.have_release_sharepoint ? 'SI' : 'NO',
                     repo.have_release_github ? 'SI' : 'NO',
                     repo.have_validate_pr ? 'SI' : 'NO',
-                    repo.is_cloud ? 'SI' : 'NO'
+                    repo.is_cloud ? 'SI' : 'NO',
+                    repo.have_sonar ? 'SI' : 'NO'
                 ].join(',');
             })
         ].join('\n');
@@ -242,6 +244,7 @@ export default function RepositoryWorkflowsActivity() {
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Github<br />release</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Validate<br />PR</th>
                             <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Cloud</th>
+                            <th className="px-2 py-4 text-center text-xs font-bold uppercase tracking-wider">Sonar</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
@@ -265,6 +268,7 @@ export default function RepositoryWorkflowsActivity() {
                                 <td className="px-2 py-4"><StatusIcon status={repo.have_release_github} /></td>
                                 <td className="px-2 py-4"><StatusIcon status={repo.have_validate_pr} /></td>
                                 <td className="px-2 py-4"><StatusIcon status={repo.is_cloud} /></td>
+                                <td className="px-2 py-4"><StatusIcon status={repo.have_sonar} /></td>
                             </tr>
                         ))}
                     </tbody>
