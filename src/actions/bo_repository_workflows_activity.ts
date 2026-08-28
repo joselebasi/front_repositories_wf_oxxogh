@@ -14,6 +14,7 @@ export type BoRepositoryWorkflowsActivityData = {
   have_release_github: boolean;
   have_validate_pr: boolean;
   have_auto_close: boolean;
+  have_sonar: boolean;
   name_repository: string;
   id_type_repository: {
     id: number;
